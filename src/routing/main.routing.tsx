@@ -7,12 +7,12 @@ import { modules, subModules } from '@/modules/routing';
 import { IRoutingModules } from '@/modules/routing/interface';
 
 /**
- * Homepage Routing
+ * Apps Routing
  * @author Irfan Andriansyah <irfan@99.co>
  * @since 2021.02.28
  */
 @modules()
-class HomepageRouting implements IRoutingModules {
+class AppsRouting implements IRoutingModules {
   /**
    * Render Basic Props
    * @param {ReactNode} children -  children props
@@ -33,18 +33,6 @@ class HomepageRouting implements IRoutingModules {
   }
 
   /**
-   * Page 1
-   * @return {ILoadableComponent}
-   */
-  @subModules(`/page-1`)
-  public login(): ILoadableComponent {
-    return Loadable({
-      loader: () => import(`@/pages/page-1`),
-      loading: () => null
-    });
-  }
-
-  /**
    * Homepage Page
    * @return {ILoadableComponent}
    */
@@ -57,4 +45,4 @@ class HomepageRouting implements IRoutingModules {
   }
 }
 
-export default HomepageRouting;
+export default AppsRouting;
