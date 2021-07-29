@@ -10,7 +10,7 @@ default:
 ## Make Initial Dev
 ###########################################################################
 init-dev:
-	@yarn add -D husky git-cz lint-staged
+	@yarn add -D git-cz@4.7.6 husky@4.3.8 lint-staged@10.5.4
 	@yarn install
 
 ###########################################################################

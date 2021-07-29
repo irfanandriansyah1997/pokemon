@@ -1,4 +1,3 @@
-/* eslint-disable sort-exports/sort-exports */
 import { FC, ReactNode } from 'react';
 import { Route, Switch } from 'react-router-dom';
 
