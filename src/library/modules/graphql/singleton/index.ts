@@ -20,7 +20,7 @@ export class GraphqlConnection {
   private execute(): ApolloClient<NormalizedCacheObject> {
     return new ApolloClient({
       cache: new InMemoryCache(),
-      uri: process.env.NEXT_PUBLIC_GRAPHQL_URL
+      uri: process.env.REACT_APP_GRAPHQL_HOST
     });
   }
 

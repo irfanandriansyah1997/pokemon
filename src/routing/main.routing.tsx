@@ -1,6 +1,4 @@
-import { ReactNode } from 'react';
 import Loadable from 'react-loadable';
-import { Link } from 'react-router-dom';
 
 import { ILoadableComponent } from '@/library/interface';
 import { modules, subModules } from '@/modules/routing';
@@ -18,19 +16,7 @@ class AppsRouting implements IRoutingModules {
    * @param {ReactNode} children -  children props
    * @returns {ReactNode}
    */
-  public render(children: ReactNode): ReactNode {
-    return (
-      <div>
-        <ul>
-          <li>
-            <Link to="/">Homepage</Link>
-            <Link to="/page-1">Other Page</Link>
-          </li>
-        </ul>
-        {children}
-      </div>
-    );
-  }
+  public render = undefined;
 
   /**
    * Homepage Page

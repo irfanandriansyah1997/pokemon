@@ -1,6 +1,8 @@
+import { ApolloProvider } from '@apollo/client';
 import { PureComponent, ReactNode } from 'react';
 import { HashRouter } from 'react-router-dom';
 
+import { GraphqlConnection } from '@/modules/graphql/singleton';
 import { GenerateRouting } from '@/modules/routing/helper';
 import { IRouteConstruct as Construct } from '@/modules/routing/interface';
 
@@ -17,6 +19,12 @@ export abstract class RoutingAPPAbstract extends PureComponent {
    * @returns {ReactNode}
    */
   render(): ReactNode {
-    return <HashRouter>{GenerateRouting(this.modules)}</HashRouter>;
+    return (
+      <HashRouter>
+        <ApolloProvider client={GraphqlConnection.singleton()}>
+          {GenerateRouting(this.modules)}
+        </ApolloProvider>
+      </HashRouter>
+    );
   }
 }
