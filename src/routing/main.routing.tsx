@@ -1,6 +1,6 @@
 import Loadable from 'react-loadable';
 
-import { ILoadableComponent } from '@/library/interface';
+import { ILoadableComponent } from '@/library/interface/general';
 import { modules, subModules } from '@/modules/routing';
 import { IRoutingModules } from '@/modules/routing/interface';
 

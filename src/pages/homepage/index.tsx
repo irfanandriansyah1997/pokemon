@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import { usePokemonList } from '@/library/features/pokemon-list';
+import { usePokemonList } from '@/library/features/pokemon-list/hooks';
 
 /**
  * Homepage Page

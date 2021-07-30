@@ -1,16 +1,17 @@
-import { verifiedIsNotEmpty } from '@99/helper/validation.helper';
 import { useQuery } from '@apollo/client';
 import { useState } from 'react';
 
-import { PokemonItem, QueryPokemonsArgs as Args } from '@/contract/graphql';
+import { QueryPokemonsArgs as Args } from '@/contract/graphql';
+import { DEFAULT_ARGS_POKEMON_LIST } from '@/library/features/pokemon-list/constant';
+import { IPokemonListHooks } from '@/library/features/pokemon-list/interface';
 import { usePagination } from '@/library/hooks/pagination';
-import { IBaseQueryError, PickGQL } from '@/library/interface';
-import { NullAble } from '@/library/interface/type-checking.interface';
+import { NullAble } from '@/library/interface/general/type-checking.interface';
+import { IBaseQueryError, PickGQL } from '@/library/interface/gql';
+import { IPokemon } from '@/library/interface/pokemon';
 import { POKEMON_LIST_QUERY } from '@/library/query';
 import { translateApolloError } from '@/modules/graphql/helper';
 
-import { IPokemonListHooks } from './interface/pokemon-list-hooks.interface';
-import { DEFAULT_ARGS_POKEMON_LIST } from './constant';
+import { translatePokemonItem } from '../helper';
 
 /**
  * Pokemon List Hooks
@@ -19,26 +20,24 @@ import { DEFAULT_ARGS_POKEMON_LIST } from './constant';
  */
 export const usePokemonList = (): IPokemonListHooks => {
   const [variables, setVariables] = useState<Args>(DEFAULT_ARGS_POKEMON_LIST);
-  const [pokemon, setPokemon] = useState<PokemonItem[]>([]);
+  const [pokemon, setPokemon] = useState<IPokemon[]>([]);
   const [error, setError] = useState<NullAble<IBaseQueryError>>();
   const {
     action: { updateRange },
     state: { enableLoadMore, offset }
   } = usePagination();
 
-  const { loading } = useQuery<PickGQL<'pokemons'>>(POKEMON_LIST_QUERY, {
+  const { loading } = useQuery<PickGQL<'pokemons'>, Args>(POKEMON_LIST_QUERY, {
     onCompleted: ({ pokemons }) => {
-      const result = (pokemons?.results || []).filter(
-        verifiedIsNotEmpty
-      ) as PokemonItem[];
-      const count = pokemons?.count || 0;
-      const nextOffset = pokemons?.nextOffset || 0;
+      if (pokemons) {
+        const { count = 0, nextOffset = 0, results } = pokemons;
 
-      setPokemon([...pokemon, ...result]);
-      updateRange({
-        offset: nextOffset,
-        totalData: count
-      });
+        setPokemon([...pokemon, ...translatePokemonItem(results)]);
+        updateRange({
+          offset: nextOffset as number,
+          totalData: count as number
+        });
+      }
     },
     onError: (error) => {
       setError(translateApolloError(error));

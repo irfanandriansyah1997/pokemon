@@ -1,5 +1,5 @@
-import { PokemonItem } from '@/contract/graphql';
-import { IBaseQueryState } from '@/library/interface';
+import { IBaseQueryState } from '@/library/interface/gql';
+import { IPokemon } from '@/library/interface/pokemon';
 
 /**
  * Pokemon List Hooks Interface
@@ -16,7 +16,7 @@ export interface IPokemonListHooks {
  * @author Irfan Andriansyah <irfan@99.co>
  * @since 2021.07.29
  */
-export type IPokemonListHooksState = IBaseQueryState<PokemonItem[]>;
+export type IPokemonListHooksState = IBaseQueryState<IPokemon[]>;
 
 /**
  * Pokemon List Hooks Action
