@@ -1,6 +1,6 @@
 import { ApolloError } from '@apollo/client';
 
-import { IBaseQueryError } from '@/library/interface';
+import { IBaseQueryError } from '@/library/interface/gql';
 
 /**
  * Translate Error
