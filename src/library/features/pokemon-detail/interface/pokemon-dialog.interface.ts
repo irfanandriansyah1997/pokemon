@@ -1,8 +1,13 @@
-import { IEventComponent } from '@/library/interface/general/event.interface';
+import { IEventComponent } from '@/library/interface/general';
+import { IPokemon } from '@/library/interface/pokemon';
 
 export type IEventOnClose = IEventComponent<'on-close'>;
 
 export type IEventOnRelease = IEventComponent<'on-release'>;
+
+export type IPokemonDialogEvent = (
+  event: IEventOnClose | IEventOnRelease
+) => void;
 
 /**
  * Pokemon Dialog Props
@@ -10,6 +15,7 @@ export type IEventOnRelease = IEventComponent<'on-release'>;
  * @since 2021.07.30
  */
 export interface IPokemonDialogProps {
-  on: (event: IEventOnClose | IEventOnRelease) => void;
+  on: IPokemonDialogEvent;
+  pokemon?: IPokemon;
   showDialog: boolean;
 }

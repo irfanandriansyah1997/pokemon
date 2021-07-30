@@ -31,7 +31,6 @@ export interface IPokemonOptional {
   height: number;
   moves: { move: Partial<IPokemonBase> }[];
   nickname: string;
-  onClick: (name: string) => void;
   pokeMoves: IPokemonMove;
   pokeSpecies: IPokemonSpecies;
   species: IPokemonBase;

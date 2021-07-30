@@ -1,6 +1,17 @@
-import { FC } from 'react';
+import { FC, useState } from 'react';
+import Loadable from 'react-loadable';
 
+import { IPokemonDialogEvent as DialogEvent } from '@/library/features/pokemon-detail/interface';
+import PokemonCard from '@/library/features/pokemon-list/component/pokemon-card';
 import { usePokemonList } from '@/library/features/pokemon-list/hooks';
+import { NullAble } from '@/library/interface/general';
+import { IPokemon } from '@/library/interface/pokemon';
+
+const PokemonDialog = Loadable({
+  loader: () =>
+    import(`@/library/features/pokemon-detail/component/pokemon-dialog`),
+  loading: () => null
+});
 
 /**
  * Homepage Page
@@ -8,40 +19,51 @@ import { usePokemonList } from '@/library/features/pokemon-list/hooks';
  * @since 2021.05.03
  */
 const Homepage: FC = () => {
+  const [selectedPokemon, registerPokemon] = useState<NullAble<IPokemon>>();
   const {
     action: { loadMore },
     state: { response }
   } = usePokemonList();
 
+  /**
+   * Selected Pokemon
+   * @param {string} pokemonName - pokemon name selected when user click pokemon card
+   * @returns {void}
+   */
+  const setSelectedPokemon = (pokemonName: string): void => {
+    registerPokemon(response.find(({ name }) => name === pokemonName));
+  };
+
+  /**
+   * Event Listener Poke Dialog
+   * @param {e} event - pokemon dialog event when user interact
+   * @returns {void}
+   */
+  const eventListenerPokeDialog: DialogEvent = ({ event }): void => {
+    switch (event) {
+      case `on-close`:
+        registerPokemon(undefined);
+        break;
+
+      default:
+        break;
+    }
+  };
+
   return (
-    <div style={{ display: `flex`, flexWrap: `wrap` }}>
-      {response.map(({ image, name }) => (
-        <div
-          key={name}
-          style={{
-            alignItems: `center`,
-            background: `#fafafa`,
-            borderRadius: 10,
-            display: `flex`,
-            flexDirection: `column`,
-            height: 100,
-            justifyContent: `center`,
-            margin: `10px`,
-            minWidth: `calc(50vw - 30px)`
-          }}
-        >
-          <img style={{ width: 50 }} alt={`${name}`} src={`${image}`} />
-          {name}
-        </div>
-      ))}
+    <>
+      <div style={{ display: `flex`, flexWrap: `wrap` }}>
+        {response.map(({ ...res }) => (
+          <PokemonCard key={res.id} {...res} onClick={setSelectedPokemon} />
+        ))}
+      </div>
+      <PokemonDialog
+        pokemon={selectedPokemon}
+        showDialog={Boolean(selectedPokemon)}
+        on={eventListenerPokeDialog}
+      />
       <button
         type="submit"
-        style={{
-          border: 0,
-          borderRadius: 10,
-          margin: `10px auto 10px`,
-          padding: 10
-        }}
         onClick={(e): void => {
           e.preventDefault();
           loadMore();
@@ -49,7 +71,7 @@ const Homepage: FC = () => {
       >
         Load More
       </button>
-    </div>
+    </>
   );
 };
 
