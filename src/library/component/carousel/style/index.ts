@@ -8,6 +8,7 @@ export const CarouselWrapper = styled.div<ICarouselWrapper>(
     '> div:first-of-type': {
       alignItems: `center`,
       display: `flex`,
+      transform: `translateX(0%)`,
       transition: `all .3s cubic-bezier(0.645, 0.045, 0.355, 1)`,
       width: `100%`
     },

@@ -31,7 +31,8 @@ export const pokemonDetailReducer: GenReducer<Reducer, Action> = (
       }
 
       return {
-        ...state
+        ...state,
+        pokemon: undefined
       };
     }
 

@@ -37,11 +37,12 @@ export const usePokemonDetail = (
    * @param {NullAble<IPokemon>} pokemon - Pokemon object from gql
    * @returns {void}
    */
-  const setPokemon = (payload: NullAble<IPokemon>): void =>
+  const setPokemon = (payload: NullAble<IPokemon>): void => {
     dispatch({
       payload,
       type: IPokemonDetailTypesEnum.setPokemonState
     });
+  };
 
   /**
    * Set Pokemon Species

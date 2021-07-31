@@ -127,6 +127,7 @@ export const PokemonTopSectionDialog = styled.div({
   '> div': {
     left: 0,
     position: `absolute`,
+    top: 30,
     width: `100vw`
   },
   left: 0,

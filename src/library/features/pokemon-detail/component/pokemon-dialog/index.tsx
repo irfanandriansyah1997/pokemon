@@ -63,6 +63,12 @@ const PokemonDialog: FC<IPokemonDialogProps> = ({ on, showDialog, ...res }) => {
     }
   }, [pokemon, res.pokemon, setPokemon]);
 
+  useEffect(() => {
+    if (!showDialog) {
+      setPokemon(undefined);
+    }
+  }, [setPokemon, showDialog]);
+
   const { loading: isLoadingGQL } = useQuery<PickGQL<'pokemon'>, Args>(
     POKEMON_DETAIL_QUERY,
     {
