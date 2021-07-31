@@ -6,5 +6,6 @@ export const FONT_SIZE = {
   medium: 20,
   normal: 16,
   small: 12,
-  text: 14
+  text: 14,
+  title: 32
 };

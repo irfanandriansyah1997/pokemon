@@ -122,3 +122,28 @@ export const PokemonBackdropStyle = styled.div<IPokemonDialogBackdropProps>(
     zIndex: 999
   })
 );
+
+export const PokemonTopSectionDialog = styled.div({
+  '> div': {
+    left: 0,
+    position: `absolute`,
+    width: `100vw`
+  },
+  left: 0,
+  p: {
+    transition: `0.3s cubic-bezier(0.7, 0.3, 0, 1)`
+  },
+  'p:first-of-type': {
+    marginBottom: -5
+  },
+  'p:last-of-type': {
+    background: `rgba(255, 255, 255, 0.25)`,
+    borderRadius: `20px`,
+    display: `inline-block`,
+    padding: `5px 10px`
+  },
+  padding: `24px 18px 0`,
+  position: `absolute`,
+  top: 0,
+  width: `100vw`
+});

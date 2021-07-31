@@ -20,6 +20,7 @@ import { PokemonDetailContainer } from '@/library/styles/pokemon.styles';
 import { translateApolloError } from '@/modules/graphql/helper';
 
 import PokemonDialogBackdrop from './section/pokemon-backdrop.component';
+import PokemonTopSection from './section/pokemon-top-section.component';
 
 const PokemonAbout = Loadable({
   loader: () =>
@@ -45,8 +46,8 @@ const PokemonDialog: FC<IPokemonDialogProps> = ({ on, showDialog, ...res }) => {
   } = usePokemonDetail(res.pokemon);
   const [enableScroll, setEnableScroll] = useState(false);
   const [showBackdrop, toggleShowBackdrop] = useState(false);
-  const { pokeSpecies } = pokemon || {};
-  const { color } = pokeSpecies || {};
+  const { id, name, pokeSpecies, sprites } = pokemon || {};
+  const { color, genera = [] } = pokeSpecies || {};
 
   useEffect(() => {
     if (showDialog && document) {
@@ -161,25 +162,42 @@ const PokemonDialog: FC<IPokemonDialogProps> = ({ on, showDialog, ...res }) => {
         onSnap={onSnapSheet}
         onClose={onCloseDialog}
       >
-        <Sheet.Container>
-          <Sheet.Header />
-          <Sheet.Header>
-            <TabAction
-              active={selection}
-              list={POKEMON_TAB_ITEM}
-              on={onChangeSelection}
+        <div>
+          <Sheet.Container>
+            <Sheet.Header />
+            <Sheet.Header>
+              <TabAction
+                active={selection}
+                list={POKEMON_TAB_ITEM}
+                on={onChangeSelection}
+              />
+            </Sheet.Header>
+            <Sheet.Content
+              style={{ overflow: enableScroll ? `scroll` : `hidden` }}
+            >
+              {!loading && (
+                <PokemonDetailContainer>
+                  {generateContent()}
+                </PokemonDetailContainer>
+              )}
+            </Sheet.Content>
+          </Sheet.Container>
+          {pokemon ? (
+            <PokemonTopSection
+              id={`${id}`}
+              showImage={!enableScroll}
+              name={name as string}
+              showWrapper={!loading}
+              genus={
+                genera.find(
+                  ({ language }) =>
+                    language.name === process.env.REACT_APP_POKEMON_LANGUAGE
+                )?.genus || ``
+              }
+              sprite={sprites}
             />
-          </Sheet.Header>
-          <Sheet.Content
-            style={{ overflow: enableScroll ? `scroll` : `hidden` }}
-          >
-            {!loading && (
-              <PokemonDetailContainer>
-                {generateContent()}
-              </PokemonDetailContainer>
-            )}
-          </Sheet.Content>
-        </Sheet.Container>
+          ) : null}
+        </div>
       </Sheet>
     </>
   );
