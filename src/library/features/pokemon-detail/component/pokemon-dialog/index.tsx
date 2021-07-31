@@ -43,7 +43,7 @@ const PokemonDialog: FC<IPokemonDialogProps> = ({ on, showDialog, ...res }) => {
   const {
     action: { setPokemon, setSelection, toggleLoading },
     state: { isLoadingRest, pokemon, selection }
-  } = usePokemonDetail(res.pokemon);
+  } = usePokemonDetail();
   const [enableScroll, setEnableScroll] = useState(false);
   const [showBackdrop, toggleShowBackdrop] = useState(false);
   const { id, name, pokeSpecies, sprites } = pokemon || {};
@@ -63,12 +63,6 @@ const PokemonDialog: FC<IPokemonDialogProps> = ({ on, showDialog, ...res }) => {
     }
   }, [pokemon, res.pokemon, setPokemon]);
 
-  useEffect(() => {
-    if (!showDialog) {
-      setPokemon(undefined);
-    }
-  }, [setPokemon, showDialog]);
-
   const { loading: isLoadingGQL } = useQuery<PickGQL<'pokemon'>, Args>(
     POKEMON_DETAIL_QUERY,
     {
@@ -81,8 +75,9 @@ const PokemonDialog: FC<IPokemonDialogProps> = ({ on, showDialog, ...res }) => {
       onError: (error) => {
         translateApolloError(error);
       },
-      skip: !showDialog || !pokemon || !verifiedIsNotEmpty(pokemon.name),
-      variables: { name: pokemon?.name as string }
+      skip:
+        !showDialog || !res.pokemon || !verifiedIsNotEmpty(res.pokemon.name),
+      variables: { name: res.pokemon?.name as string }
     }
   );
 
