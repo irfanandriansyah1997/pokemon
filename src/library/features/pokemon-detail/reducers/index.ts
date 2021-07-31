@@ -31,12 +31,17 @@ export const pokemonDetailReducer: GenReducer<Reducer, Action> = (
       }
 
       return {
-        ...state
+        ...state,
+        pokemon: undefined
       };
     }
 
     case Types.setLoading: {
       return { ...state, isLoadingRest: payload as boolean };
+    }
+
+    case Types.setSelection: {
+      return { ...state, selection: payload as number };
     }
 
     case Types.setPokemonState: {

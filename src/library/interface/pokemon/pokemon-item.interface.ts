@@ -1,4 +1,3 @@
-import { IPokemonMove } from './pokemon-move.interface';
 import { IPokemonSpecies } from './pokemon-species.interface';
 import {
   IPokemonAbilities,
@@ -31,7 +30,6 @@ export interface IPokemonOptional {
   height: number;
   moves: { move: Partial<IPokemonBase> }[];
   nickname: string;
-  pokeMoves: IPokemonMove;
   pokeSpecies: IPokemonSpecies;
   species: IPokemonBase;
   sprites: IPokemonSprites;

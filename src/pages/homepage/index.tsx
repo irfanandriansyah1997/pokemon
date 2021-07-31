@@ -1,3 +1,4 @@
+import { verifiedIsNotEmpty } from '@99/helper';
 import { FC, useState } from 'react';
 import Loadable from 'react-loadable';
 
@@ -59,7 +60,7 @@ const Homepage: FC = () => {
       </div>
       <PokemonDialog
         pokemon={selectedPokemon}
-        showDialog={Boolean(selectedPokemon)}
+        showDialog={verifiedIsNotEmpty(selectedPokemon)}
         on={eventListenerPokeDialog}
       />
       <button

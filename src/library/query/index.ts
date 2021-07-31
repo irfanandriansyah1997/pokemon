@@ -35,12 +35,6 @@ export const POKEMON_DETAIL_QUERY = gql`
           name
         }
       }
-      moves {
-        move {
-          name
-          url
-        }
-      }
       abilities {
         ability {
           name
@@ -65,16 +59,6 @@ export const POKEMON_DETAIL_QUERY = gql`
 export const POKEMON_EVOLUTION_QUERY = gql`
   query getEvolution($id: String!) {
     evolutionChain(id: $id) {
-      status
-      message
-      response
-    }
-  }
-`;
-
-export const POKEMON_MOVE_QUERY = gql`
-  query getMove($move: String!) {
-    move(move: $move) {
       status
       message
       response
