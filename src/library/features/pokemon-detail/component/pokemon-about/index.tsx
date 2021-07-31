@@ -48,7 +48,9 @@ const PokemonAbout: FC<IPokemon> = ({
 
   return (
     <>
-      <Label textAlign="justify">{description}</Label>
+      <Label textAlign="justify" style={{ marginTop: 24 }}>
+        {description}
+      </Label>
       <PokemonTypes>
         {types.map(({ type: { name } }) => (
           <Badge key={name}>{name}</Badge>

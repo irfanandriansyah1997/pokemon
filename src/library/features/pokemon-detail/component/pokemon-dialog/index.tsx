@@ -5,17 +5,31 @@ import Loadable from 'react-loadable';
 import Sheet from 'react-modal-sheet';
 
 import { QueryPokemonArgs as Args } from '@/contract/graphql';
+import TabAction from '@/library/component/tab-action';
+import { ITabActionEvent } from '@/library/component/tab-action/interface';
+import { POKEMON_TAB_ITEM } from '@/library/constant/pokemon';
 import { usePokemonDetail } from '@/library/features/pokemon-detail/hooks';
-import { IPokemonDialogProps } from '@/library/features/pokemon-detail/interface';
+import {
+  IPokemonDialogProps,
+  IPokemonTab
+} from '@/library/features/pokemon-detail/interface';
 import { PickGQL } from '@/library/interface/gql';
 import { IPokemon } from '@/library/interface/pokemon';
 import { POKEMON_DETAIL_QUERY } from '@/library/query';
 import { PokemonDetailContainer } from '@/library/styles/pokemon.styles';
 import { translateApolloError } from '@/modules/graphql/helper';
 
+import PokemonDialogBackdrop from './section/pokemon-backdrop.component';
+
 const PokemonAbout = Loadable({
   loader: () =>
     import(`@/library/features/pokemon-detail/component/pokemon-about`),
+  loading: () => null
+});
+
+const PokemonStats = Loadable({
+  loader: () =>
+    import(`@/library/features/pokemon-detail/component/pokemon-stats`),
   loading: () => null
 });
 
@@ -26,11 +40,11 @@ const PokemonAbout = Loadable({
  */
 const PokemonDialog: FC<IPokemonDialogProps> = ({ on, showDialog, ...res }) => {
   const {
-    action: { setPokemon, setSelection },
+    action: { setPokemon, setSelection, toggleLoading },
     state: { isLoadingRest, pokemon, selection }
   } = usePokemonDetail(res.pokemon);
   const [enableScroll, setEnableScroll] = useState(false);
-
+  const [showBackdrop, toggleShowBackdrop] = useState(false);
   const { pokeSpecies } = pokemon || {};
   const { color } = pokeSpecies || {};
 
@@ -54,6 +68,7 @@ const PokemonDialog: FC<IPokemonDialogProps> = ({ on, showDialog, ...res }) => {
       onCompleted: ({ pokemon: resultGQL }) => {
         if (resultGQL) {
           setPokemon({ ...res.pokemon, ...(resultGQL as IPokemon) });
+          toggleLoading(true);
         }
       },
       onError: (error) => {
@@ -71,6 +86,7 @@ const PokemonDialog: FC<IPokemonDialogProps> = ({ on, showDialog, ...res }) => {
   const onCloseDialog = (): void => {
     setPokemon(undefined);
     setSelection(0);
+
     on({
       event: `on-close`
     });
@@ -98,8 +114,12 @@ const PokemonDialog: FC<IPokemonDialogProps> = ({ on, showDialog, ...res }) => {
   const generateContent = (): ReactNode => {
     if (pokemon) {
       switch (selection) {
-        case 0: {
+        case IPokemonTab.about: {
           return <PokemonAbout {...(pokemon as IPokemon)} />;
+        }
+
+        case IPokemonTab.stats: {
+          return <PokemonStats {...(pokemon as IPokemon)} />;
         }
 
         default:
@@ -110,32 +130,58 @@ const PokemonDialog: FC<IPokemonDialogProps> = ({ on, showDialog, ...res }) => {
     return null;
   };
 
+  /**
+   * On Change Index
+   * @param {IEventOnChangeIndex} event - event when user change tab selection
+   * @returns {void}
+   */
+  const onChangeSelection: ITabActionEvent = ({ event, payload }): void => {
+    switch (event) {
+      case `on-change-index`:
+        setSelection(payload);
+        break;
+
+      default:
+        break;
+    }
+  };
+
   return (
-    <Sheet
-      isOpen={showDialog}
-      snapPoints={[600, 450]}
-      initialSnap={1}
-      onSnap={onSnapSheet}
-      onClose={onCloseDialog}
-    >
-      <Sheet.Container>
-        <Sheet.Header />
-        <Sheet.Header>Test</Sheet.Header>
-        <Sheet.Content style={{ overflow: enableScroll ? `scroll` : `hidden` }}>
-          {loading ? (
-            <p>Loading</p>
-          ) : (
-            <PokemonDetailContainer>{generateContent()}</PokemonDetailContainer>
-          )}
-        </Sheet.Content>
-      </Sheet.Container>
-      <Sheet.Backdrop
-        style={{
-          backgroundColor: loading ? `#ddd` : color?.name,
-          transition: `all 0.5s`
-        }}
+    <>
+      <PokemonDialogBackdrop
+        show={showBackdrop}
+        color={loading ? `#ddd` : (color?.name as string)}
       />
-    </Sheet>
+      <Sheet
+        isOpen={showDialog}
+        snapPoints={[600, 450]}
+        onCloseStart={() => toggleShowBackdrop(false)}
+        onOpenStart={() => toggleShowBackdrop(true)}
+        initialSnap={1}
+        onSnap={onSnapSheet}
+        onClose={onCloseDialog}
+      >
+        <Sheet.Container>
+          <Sheet.Header />
+          <Sheet.Header>
+            <TabAction
+              active={selection}
+              list={POKEMON_TAB_ITEM}
+              on={onChangeSelection}
+            />
+          </Sheet.Header>
+          <Sheet.Content
+            style={{ overflow: enableScroll ? `scroll` : `hidden` }}
+          >
+            {!loading && (
+              <PokemonDetailContainer>
+                {generateContent()}
+              </PokemonDetailContainer>
+            )}
+          </Sheet.Content>
+        </Sheet.Container>
+      </Sheet>
+    </>
   );
 };
 

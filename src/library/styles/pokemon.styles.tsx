@@ -2,6 +2,7 @@ import styled from '@emotion/styled';
 
 import Ability from '@/assets/images/ability.svg';
 
+import { IPokemonDialogBackdropProps } from '../features/pokemon-detail/interface';
 import { COLOR } from './constant';
 import { IPokemonContainerProps } from './interface';
 
@@ -105,3 +106,19 @@ export const PokemonTrainingCard = styled.div`
     margin-top: 5px;
   }
 `;
+
+export const PokemonBackdropStyle = styled.div<IPokemonDialogBackdropProps>(
+  ({ color, show }) => ({
+    background: `${
+      show ? color || `rgba(255,255,255,0.5)` : `rgba(255,255,255,0.5)`
+    }`,
+    height: `100%`,
+    left: 0,
+    position: `fixed`,
+    top: 0,
+    transition: `0.3s cubic-bezier(0.7, 0.3, 0, 1)`,
+    visibility: show ? `visible` : `hidden`,
+    width: `100%`,
+    zIndex: 999
+  })
+);

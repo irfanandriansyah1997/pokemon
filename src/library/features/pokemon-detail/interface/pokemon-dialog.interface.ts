@@ -19,3 +19,13 @@ export interface IPokemonDialogProps {
   pokemon?: IPokemon;
   showDialog: boolean;
 }
+
+/**
+ * Pokemon Dialog Backdrop Props
+ * @author Irfan Andriansyah <irfan@99.co>
+ * @since 2021.07.31
+ */
+export interface IPokemonDialogBackdropProps {
+  color?: string;
+  show?: boolean;
+}
