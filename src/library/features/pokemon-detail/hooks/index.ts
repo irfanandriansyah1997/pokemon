@@ -25,7 +25,8 @@ export const usePokemonDetail = (
 ): IPokemonDetailHooks => {
   const { current: initialState } = useRef<IPokemonDetailReducer>({
     isLoadingRest: false,
-    pokemon: initialData
+    pokemon: initialData,
+    selection: 0
   });
   const [state, dispatch] = useReducer(pokemonDetailReducer, initialState);
   const { pokemon } = state;
@@ -65,6 +66,17 @@ export const usePokemonDetail = (
     });
 
   /**
+   * Set Selection Tab
+   * @param {number} index - selection tab index
+   * @returns {void}
+   */
+  const setSelection = (payload: number) =>
+    dispatch({
+      payload,
+      type: IPokemonDetailTypesEnum.setSelection
+    });
+
+  /**
    * Fetch Species From API
    * @param {IPokemonBase} species - species object from gql
    * @returns {Promise<void>}
@@ -90,6 +102,7 @@ export const usePokemonDetail = (
     action: {
       setPokemon,
       setPokemonSpecies,
+      setSelection,
       toggleLoading
     },
     state

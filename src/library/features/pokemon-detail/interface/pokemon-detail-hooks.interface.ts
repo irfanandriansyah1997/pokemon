@@ -20,5 +20,6 @@ export interface IPokemonDetailHooks {
 export interface IPokemonDetailHooksAction {
   setPokemon(param: IPokemon | undefined): void;
   setPokemonSpecies(param: IPokemonSpecies): void;
+  setSelection(param: number): void;
   toggleLoading(param: boolean): void;
 }

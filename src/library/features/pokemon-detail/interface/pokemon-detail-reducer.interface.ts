@@ -11,6 +11,7 @@ export interface IPokemonDetailReducer {
   error?: IBaseQueryError;
   isLoadingRest: boolean;
   pokemon?: IPokemon;
+  selection: number;
 }
 
 /**
@@ -21,6 +22,7 @@ export interface IPokemonDetailReducer {
 export enum IPokemonDetailTypesEnum {
   setLoading = `SET_LOADING`,
   setPokemonState = `SET_POKEMON`,
+  setSelection = `SET_SELECTION`,
   setPokemonSpecies = `SET_POKEMON_SPECIES`
 }
 
@@ -32,6 +34,7 @@ export enum IPokemonDetailTypesEnum {
 type IPokemonDetailPayload = {
   [IPokemonDetailTypesEnum.setLoading]: boolean;
   [IPokemonDetailTypesEnum.setPokemonState]: NullAble<IPokemon>;
+  [IPokemonDetailTypesEnum.setSelection]: number;
   [IPokemonDetailTypesEnum.setPokemonSpecies]: IPokemonSpecies;
 };
 

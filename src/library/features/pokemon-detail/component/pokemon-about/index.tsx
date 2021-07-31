@@ -2,6 +2,8 @@ import { FC, Fragment } from 'react';
 
 import Eggs from '@/assets/images/eggs.svg';
 import { getDescriptionText } from '@/helper/pokemon.helper';
+import PokemonTraining from '@/library/features/pokemon-detail/component/pokemon-training';
+import { generatePokemonAttribute } from '@/library/features/pokemon-detail/helper';
 import { IPokemon, IPokemonAbilities } from '@/library/interface/pokemon';
 import {
   Badge,
@@ -16,9 +18,6 @@ import {
   PokemonTrainingSlider,
   PokemonTypes
 } from '@/library/styles/pokemon.styles';
-
-import { generatePokemonAttribute } from '../../helper/pokemon-attribute.helper';
-import PokemonTraining from '../pokemon-training';
 
 /**
  * Pokemon About

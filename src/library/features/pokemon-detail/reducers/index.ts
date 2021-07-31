@@ -39,6 +39,10 @@ export const pokemonDetailReducer: GenReducer<Reducer, Action> = (
       return { ...state, isLoadingRest: payload as boolean };
     }
 
+    case Types.setSelection: {
+      return { ...state, selection: payload as number };
+    }
+
     case Types.setPokemonState: {
       const { pokemon } = state;
 

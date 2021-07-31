@@ -1,6 +1,7 @@
 import { verifiedIsNotEmpty } from '@99/helper';
 import { useQuery } from '@apollo/client';
-import { FC, useEffect, useState } from 'react';
+import { FC, ReactNode, useEffect, useState } from 'react';
+import Loadable from 'react-loadable';
 import Sheet from 'react-modal-sheet';
 
 import { QueryPokemonArgs as Args } from '@/contract/graphql';
@@ -12,7 +13,11 @@ import { POKEMON_DETAIL_QUERY } from '@/library/query';
 import { PokemonDetailContainer } from '@/library/styles/pokemon.styles';
 import { translateApolloError } from '@/modules/graphql/helper';
 
-import PokemonAbout from '../pokemon-about';
+const PokemonAbout = Loadable({
+  loader: () =>
+    import(`@/library/features/pokemon-detail/component/pokemon-about`),
+  loading: () => null
+});
 
 /**
  * Pokemon Dialog Component
@@ -21,8 +26,8 @@ import PokemonAbout from '../pokemon-about';
  */
 const PokemonDialog: FC<IPokemonDialogProps> = ({ on, showDialog, ...res }) => {
   const {
-    action: { setPokemon },
-    state: { isLoadingRest, pokemon }
+    action: { setPokemon, setSelection },
+    state: { isLoadingRest, pokemon, selection }
   } = usePokemonDetail(res.pokemon);
   const [enableScroll, setEnableScroll] = useState(false);
 
@@ -65,6 +70,7 @@ const PokemonDialog: FC<IPokemonDialogProps> = ({ on, showDialog, ...res }) => {
    */
   const onCloseDialog = (): void => {
     setPokemon(undefined);
+    setSelection(0);
     on({
       event: `on-close`
     });
@@ -85,6 +91,25 @@ const PokemonDialog: FC<IPokemonDialogProps> = ({ on, showDialog, ...res }) => {
 
   const loading = isLoadingGQL || isLoadingRest;
 
+  /**
+   * Generate Content
+   * @returns {ReactNode}
+   */
+  const generateContent = (): ReactNode => {
+    if (pokemon) {
+      switch (selection) {
+        case 0: {
+          return <PokemonAbout {...(pokemon as IPokemon)} />;
+        }
+
+        default:
+          break;
+      }
+    }
+
+    return null;
+  };
+
   return (
     <Sheet
       isOpen={showDialog}
@@ -100,9 +125,7 @@ const PokemonDialog: FC<IPokemonDialogProps> = ({ on, showDialog, ...res }) => {
           {loading ? (
             <p>Loading</p>
           ) : (
-            <PokemonDetailContainer>
-              <PokemonAbout {...(pokemon as IPokemon)} />
-            </PokemonDetailContainer>
+            <PokemonDetailContainer>{generateContent()}</PokemonDetailContainer>
           )}
         </Sheet.Content>
       </Sheet.Container>
