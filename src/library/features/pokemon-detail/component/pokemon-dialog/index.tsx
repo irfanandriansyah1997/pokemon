@@ -11,6 +11,8 @@ import { IPokemon } from '@/library/interface/pokemon';
 import { POKEMON_DETAIL_QUERY } from '@/library/query';
 import { translateApolloError } from '@/modules/graphql/helper';
 
+import PokemonAbout from '../pokemon-about';
+
 /**
  * Pokemon Dialog Component
  * @author Irfan Andriansyah <irfan@99.co>
@@ -19,8 +21,11 @@ import { translateApolloError } from '@/modules/graphql/helper';
 const PokemonDialog: FC<IPokemonDialogProps> = ({ on, showDialog, ...res }) => {
   const {
     action: { setPokemon },
-    state: { pokemon }
+    state: { isLoadingRest, pokemon }
   } = usePokemonDetail(res.pokemon);
+
+  const { pokeSpecies } = pokemon || {};
+  const { color } = pokeSpecies || {};
 
   useEffect(() => {
     if (res.pokemon && res.pokemon.id !== pokemon?.id) {
@@ -28,18 +33,23 @@ const PokemonDialog: FC<IPokemonDialogProps> = ({ on, showDialog, ...res }) => {
     }
   }, [pokemon, res.pokemon, setPokemon]);
 
-  const { loading } = useQuery<PickGQL<'pokemon'>, Args>(POKEMON_DETAIL_QUERY, {
-    onCompleted: ({ pokemon: resultGQL }) => {
-      if (resultGQL) {
-        setPokemon({ ...res.pokemon, ...(resultGQL as IPokemon) });
-      }
-    },
-    onError: (error) => {
-      translateApolloError(error);
-    },
-    skip: !showDialog || !pokemon || !verifiedIsNotEmpty(pokemon.name),
-    variables: { name: pokemon?.name as string }
-  });
+  const { loading: isLoadingGQL } = useQuery<PickGQL<'pokemon'>, Args>(
+    POKEMON_DETAIL_QUERY,
+    {
+      onCompleted: ({ pokemon: resultGQL }) => {
+        if (resultGQL) {
+          setPokemon({ ...res.pokemon, ...(resultGQL as IPokemon) });
+        }
+      },
+      onError: (error) => {
+        translateApolloError(error);
+      },
+      skip: !showDialog || !pokemon || !verifiedIsNotEmpty(pokemon.name),
+      variables: { name: pokemon?.name as string }
+    }
+  );
+
+  const loading = isLoadingGQL || isLoadingRest;
 
   return (
     <Sheet
@@ -65,15 +75,15 @@ const PokemonDialog: FC<IPokemonDialogProps> = ({ on, showDialog, ...res }) => {
                 flexDirection: `column`
               }}
             >
-              <img src={pokemon?.image} alt={pokemon?.name} />
-              {pokemon?.name}
+              <PokemonAbout {...(pokemon as IPokemon)} />
             </div>
           )}
         </Sheet.Content>
       </Sheet.Container>
       <Sheet.Backdrop
         style={{
-          backgroundColor: `rgba(100, 100, 100, 0.5)`
+          backgroundColor: loading ? `#ddd` : color?.name,
+          transition: `all 0.5s`
         }}
       />
     </Sheet>
