@@ -13,7 +13,7 @@ import { PokemonTrainingCard } from '@/library/styles/pokemon.styles';
 const PokemonTraining: FC<IPokemonTrainingProps> = ({ title, value }) => (
   <PokemonTrainingCard>
     <img src={Pokemon} alt="Training" />
-    <Text fontSize="normal" fontWeight={500}>
+    <Text fontSize="normal" fontWeight={400}>
       {title}
     </Text>
     <Text fontSize="medium" fontWeight={700} color="primary">

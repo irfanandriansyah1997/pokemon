@@ -13,7 +13,6 @@ import {
 import {
   PokemonAbilities,
   PokemonAttributes,
-  PokemonDetailContainer,
   PokemonTrainingSlider,
   PokemonTypes
 } from '@/library/styles/pokemon.styles';
@@ -49,11 +48,11 @@ const PokemonAbout: FC<IPokemon> = ({
   });
 
   return (
-    <PokemonDetailContainer>
+    <>
       <Label textAlign="justify">{description}</Label>
       <PokemonTypes>
-        {types.map(({ type: { id, name } }) => (
-          <Badge key={id}>{name}</Badge>
+        {types.map(({ type: { name } }) => (
+          <Badge key={name}>{name}</Badge>
         ))}
       </PokemonTypes>
       <Heading>Pokedex Data</Heading>
@@ -98,7 +97,7 @@ const PokemonAbout: FC<IPokemon> = ({
         <PokemonTraining title="Catch Rate" value={`${capture_rate}%`} />
         <PokemonTraining title="Growth Rate" value={`${growth_rate?.name}`} />
       </PokemonTrainingSlider>
-    </PokemonDetailContainer>
+    </>
   );
 };
 

@@ -1,6 +1,6 @@
 import { verifiedIsNotEmpty } from '@99/helper';
 import { useQuery } from '@apollo/client';
-import { FC, useEffect } from 'react';
+import { FC, useEffect, useState } from 'react';
 import Sheet from 'react-modal-sheet';
 
 import { QueryPokemonArgs as Args } from '@/contract/graphql';
@@ -9,6 +9,7 @@ import { IPokemonDialogProps } from '@/library/features/pokemon-detail/interface
 import { PickGQL } from '@/library/interface/gql';
 import { IPokemon } from '@/library/interface/pokemon';
 import { POKEMON_DETAIL_QUERY } from '@/library/query';
+import { PokemonDetailContainer } from '@/library/styles/pokemon.styles';
 import { translateApolloError } from '@/modules/graphql/helper';
 
 import PokemonAbout from '../pokemon-about';
@@ -23,9 +24,18 @@ const PokemonDialog: FC<IPokemonDialogProps> = ({ on, showDialog, ...res }) => {
     action: { setPokemon },
     state: { isLoadingRest, pokemon }
   } = usePokemonDetail(res.pokemon);
+  const [enableScroll, setEnableScroll] = useState(false);
 
   const { pokeSpecies } = pokemon || {};
   const { color } = pokeSpecies || {};
+
+  useEffect(() => {
+    if (showDialog && document) {
+      document.body.style.overflow = `hidden`;
+    } else {
+      document.body.style.overflow = `inherit`;
+    }
+  }, [showDialog]);
 
   useEffect(() => {
     if (res.pokemon && res.pokemon.id !== pokemon?.id) {
@@ -49,34 +59,50 @@ const PokemonDialog: FC<IPokemonDialogProps> = ({ on, showDialog, ...res }) => {
     }
   );
 
+  /**
+   * On Close Dialog
+   * @returns {void}
+   */
+  const onCloseDialog = (): void => {
+    setPokemon(undefined);
+    on({
+      event: `on-close`
+    });
+  };
+
+  /**
+   * Event Listener When User Snap Dialog
+   * @param {number} index - stage position
+   * @returns {void}
+   */
+  const onSnapSheet = (index: number) => {
+    if (index === 0) {
+      setEnableScroll(true);
+    } else {
+      setEnableScroll(false);
+    }
+  };
+
   const loading = isLoadingGQL || isLoadingRest;
 
   return (
     <Sheet
       isOpen={showDialog}
-      snapPoints={[700, 450]}
+      snapPoints={[600, 450]}
       initialSnap={1}
-      onClose={() =>
-        on({
-          event: `on-close`
-        })
-      }
+      onSnap={onSnapSheet}
+      onClose={onCloseDialog}
     >
       <Sheet.Container>
         <Sheet.Header />
-        <Sheet.Content>
+        <Sheet.Header>Test</Sheet.Header>
+        <Sheet.Content style={{ overflow: enableScroll ? `scroll` : `hidden` }}>
           {loading ? (
             <p>Loading</p>
           ) : (
-            <div
-              style={{
-                alignItems: `center`,
-                display: `flex`,
-                flexDirection: `column`
-              }}
-            >
+            <PokemonDetailContainer>
               <PokemonAbout {...(pokemon as IPokemon)} />
-            </div>
+            </PokemonDetailContainer>
           )}
         </Sheet.Content>
       </Sheet.Container>

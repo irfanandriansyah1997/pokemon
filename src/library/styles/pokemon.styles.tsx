@@ -3,16 +3,18 @@ import styled from '@emotion/styled';
 import Ability from '@/assets/images/ability.svg';
 
 import { COLOR } from './constant';
+import { IPokemonContainerProps } from './interface';
 
-export const PokemonDetailContainer = styled.div({
-  height: `80%`,
-  margin: `auto`,
-  maxWidth: 700,
-  overflowX: `hidden`,
-  overflowY: `scroll`,
-  padding: `0 18px`,
-  width: `calc(100vw - 36px)`
-});
+export const PokemonDetailContainer = styled.div<IPokemonContainerProps>(
+  ({ enableScroll = true }) => ({
+    margin: `auto`,
+    maxWidth: 700,
+    overflowX: `hidden`,
+    overflowY: enableScroll ? `auto` : `hidden`,
+    padding: `0 18px`,
+    width: `calc(100vw - 36px)`
+  })
+);
 
 export const PokemonTypes = styled.div({
   alignItems: `center`,
