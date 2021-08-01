@@ -11,7 +11,7 @@ export const CarouselWrapper = styled.div<ICarouselWrapper>(
       alignItems: `center`,
       display: `flex`,
       transform: `translateX(0%)`,
-      transition: `all .3s cubic-bezier(0.645, 0.045, 0.355, 1)`,
+      transition: `0.3s cubic-bezier(0.7, 0.3, 0, 1)`,
       width: `100%`
     },
     alignItems: `center`,
@@ -19,7 +19,7 @@ export const CarouselWrapper = styled.div<ICarouselWrapper>(
     height: 200,
     opacity: showCarousel ? 1 : 0,
     position: `relative`,
-    transition: `all .3s cubic-bezier(0.645, 0.045, 0.355, 1)`,
+    transition: `0.3s cubic-bezier(0.7, 0.3, 0, 1)`,
     width: `100%`
   })
 );
@@ -68,7 +68,7 @@ export const CarouselPrev = styled.div<{ show: boolean }>(({ show }) => ({
   position: `absolute`,
   top: `60%`,
   transform: `translateY(-50%)`,
-  transition: `all .3s cubic-bezier(0.645, 0.045, 0.355, 1)`,
+  transition: `0.3s cubic-bezier(0.7, 0.3, 0, 1)`,
   width: 45
 }));
 
@@ -97,7 +97,7 @@ export const CarouselNext = styled.div<{ show: boolean }>(({ show }) => ({
   right: 10,
   top: `60%`,
   transform: `translate(-50%, -50%)`,
-  transition: `all .3s cubic-bezier(0.645, 0.045, 0.355, 1)`,
+  transition: `0.3s cubic-bezier(0.7, 0.3, 0, 1)`,
   width: 45
 }));
 
@@ -118,7 +118,7 @@ export const CarouselIndicator = styled.div<{ indicator: number }>(
       margin: `0 5px`,
       minHeight: 10,
       minWidth: 10,
-      transition: `all .3s cubic-bezier(0.645, 0.045, 0.355, 1)`
+      transition: `0.3s cubic-bezier(0.7, 0.3, 0, 1)`
     },
     justifyContent: `center`,
     left: `50%`,
