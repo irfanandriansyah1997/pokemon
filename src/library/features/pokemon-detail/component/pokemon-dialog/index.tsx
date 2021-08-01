@@ -89,14 +89,20 @@ const PokemonDialog: FC<IPokemonDialogProps> = ({ on, showDialog, ...res }) => {
    * On Close Dialog
    * @returns {void}
    */
-  const onCloseDialog = (): void => {
-    setPokemon(undefined);
-    setSelection(0);
+  const onCloseDialog = (fromTopSection = false) => (): void => {
     toggleShowBackdrop(false);
 
-    on({
-      event: `on-close`
-    });
+    setTimeout(
+      () => {
+        setPokemon(undefined);
+        setSelection(0);
+
+        on({
+          event: `on-close`
+        });
+      },
+      fromTopSection ? 100 : 0
+    );
   };
 
   /**
@@ -166,7 +172,7 @@ const PokemonDialog: FC<IPokemonDialogProps> = ({ on, showDialog, ...res }) => {
         onOpenStart={() => toggleShowBackdrop(true)}
         initialSnap={1}
         onSnap={onSnapSheet}
-        onClose={onCloseDialog}
+        onClose={onCloseDialog()}
       >
         <div>
           <Sheet.Container>
@@ -191,7 +197,7 @@ const PokemonDialog: FC<IPokemonDialogProps> = ({ on, showDialog, ...res }) => {
           {pokemon ? (
             <PokemonTopSection
               id={`${id}`}
-              on={onCloseDialog}
+              on={onCloseDialog(true)}
               showImage={!enableScroll}
               name={name as string}
               showWrapper={showBackdrop}
