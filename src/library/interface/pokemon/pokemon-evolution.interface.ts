@@ -29,3 +29,16 @@ export interface IPokemonEvoDetail {
   time_of_day: string;
   trigger: Partial<IPokemonBase>;
 }
+
+/**
+ * Pokemon Evo Chain Interface
+ * @author Irfan Andriansyah <irfan@99.co>
+ * @since 2021.08.01
+ */
+export interface IPokemonEvoChain {
+  evolutionChain: {
+    response: {
+      chain: IPokemonEvo;
+    };
+  };
+}

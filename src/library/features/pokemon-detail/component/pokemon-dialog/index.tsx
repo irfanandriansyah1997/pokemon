@@ -1,7 +1,7 @@
 import { verifiedIsNotEmpty } from '@99/helper';
 import { useQuery } from '@apollo/client';
-import { FC, ReactNode, useEffect, useState } from 'react';
-import Loadable from 'react-loadable';
+import { ComponentType, FC, ReactNode, useEffect, useState } from 'react';
+import Loadable, { LoadableComponent } from 'react-loadable';
 import Sheet from 'react-modal-sheet';
 import { usePalette } from 'react-palette';
 
@@ -34,6 +34,14 @@ const PokemonStats = Loadable({
     import(`@/library/features/pokemon-detail/component/pokemon-stats`),
   loading: () => null
 });
+
+const PokemonEvolution = Loadable({
+  loader: () =>
+    import(`@/library/features/pokemon-evolution/component/pokemon-evolution`),
+  loading: () => null
+});
+
+type IPokemonTabSection = ComponentType<IPokemon> & LoadableComponent;
 
 /**
  * Pokemon Dialog Component
@@ -126,18 +134,26 @@ const PokemonDialog: FC<IPokemonDialogProps> = ({ on, showDialog, ...res }) => {
    */
   const generateContent = (): ReactNode => {
     if (pokemon) {
-      switch (selection) {
-        case IPokemonTab.about: {
-          return <PokemonAbout {...(pokemon as IPokemon)} />;
-        }
+      let Component: IPokemonTabSection = PokemonAbout;
 
-        case IPokemonTab.stats: {
-          return <PokemonStats {...(pokemon as IPokemon)} />;
-        }
+      switch (selection) {
+        case IPokemonTab.about:
+          Component = PokemonAbout as IPokemonTabSection;
+          break;
+
+        case IPokemonTab.stats:
+          Component = PokemonStats as IPokemonTabSection;
+          break;
+
+        case IPokemonTab.evolution:
+          Component = PokemonEvolution as IPokemonTabSection;
+          break;
 
         default:
-          break;
+          return null;
       }
+
+      return <Component {...(pokemon as IPokemon)} />;
     }
 
     return null;

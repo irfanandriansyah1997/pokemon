@@ -34,7 +34,7 @@ const PokemonCard: FC<IPokemonCardProps> = ({ id, image, name, onClick }) => {
       onKeyPress={(): void => undefined}
     >
       <div>
-        <img alt={`Pokemon ${name}`} src={`${image}`} />
+        <img loading="lazy" alt={`Pokemon ${name}`} src={`${image}`} />
         <div className="pokemon-text">
           <Text fontSize="large" fontWeight={700} color="white">
             {formattedPokemonID(`${id}`)}
