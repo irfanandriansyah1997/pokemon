@@ -26,7 +26,7 @@ const Carousel: FC<ICarouselProps> = ({ item, showCarousel }) => {
       >
         {item.map((image) => (
           <CarouselItem key={image}>
-            <img src={image} alt="Pokemon" />
+            <img loading="lazy" src={image} alt="Pokemon" />
           </CarouselItem>
         ))}
       </div>

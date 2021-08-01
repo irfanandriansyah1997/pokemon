@@ -56,7 +56,11 @@ const Homepage: FC = () => {
   return (
     <>
       <Header>
-        <img src="https://i.ibb.co/bBTTVbp/logo.png" alt="Pokedex Apps" />
+        <img
+          loading="lazy"
+          src="https://i.ibb.co/bBTTVbp/logo.png"
+          alt="Pokedex Apps"
+        />
         <TabAction
           active={0}
           list={[

@@ -70,7 +70,7 @@ const PokemonAbout: FC<IPokemon> = ({
               <PokemonAttributes>
                 {value.map((item) => (
                   <Text fontSize="text" key={item}>
-                    <img src={Eggs} alt={item} />
+                    <img loading="lazy" src={Eggs} alt={item} />
                     {item}
                   </Text>
                 ))}

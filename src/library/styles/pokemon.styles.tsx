@@ -145,7 +145,7 @@ export const PokemonTopSectionDialog = styled.div<{ showSection: boolean }>(
     '> div': {
       left: 0,
       position: `absolute`,
-      top: 30,
+      top: 40,
       width: `100vw`
     },
     left: 0,
@@ -269,3 +269,44 @@ export const PokeBallContainer = styled.div<{ active: boolean }>(() => ({
   position: `relative`,
   width: 25
 }));
+
+export const PokeInfoItem = styled.div({
+  alignItems: `center`,
+  borderRadius: 10,
+  boxShadow: `0 0 2px rgb(40 41 61 / 2%), 0 4px 8px rgb(96 97 112 / 8%)`,
+  display: `flex`,
+  flexDirection: `column`,
+  img: {
+    background: COLOR.light,
+    height: 100,
+    objectFit: `contain`,
+    width: 130
+  },
+  justifyContent: `center`,
+  margin: `10px 0`,
+  overflow: `hidden`,
+  p: {
+    margin: `10px 0`
+  }
+});
+
+export const PokeEvoLabel = styled.div({
+  alignItems: `center`,
+  display: `flex`,
+  flexDirection: `column`,
+  img: {
+    background: COLOR.white,
+    borderRadius: `50%`,
+    height: 20,
+    marginBottom: 5,
+    objectFit: `contain`,
+    opacity: 0.75,
+    padding: 5,
+    width: 20
+  },
+  justifyContent: `center`,
+  'p:first-of-type': {
+    lineHeight: `20px`,
+    marginBottom: 0
+  }
+});
