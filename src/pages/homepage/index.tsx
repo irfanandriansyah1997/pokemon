@@ -4,8 +4,7 @@ import Loadable from 'react-loadable';
 
 import TabAction from '@/library/component/tab-action';
 import { IPokemonDialogEvent as DialogEvent } from '@/library/features/pokemon-detail/interface';
-import PokemonCard from '@/library/features/pokemon-list/component/pokemon-card';
-import { usePokemonList } from '@/library/features/pokemon-list/hooks';
+import PokemonList from '@/library/features/pokemon-list/component/pokemon-listing';
 import { NullAble } from '@/library/interface/general';
 import { IPokemon } from '@/library/interface/pokemon';
 import { Header } from '@/library/styles/general.styles';
@@ -23,19 +22,7 @@ const PokemonDialog = Loadable({
  */
 const Homepage: FC = () => {
   const [selectedPokemon, registerPokemon] = useState<NullAble<IPokemon>>();
-  const {
-    action: { loadMore },
-    state: { response }
-  } = usePokemonList();
-
-  /**
-   * Selected Pokemon
-   * @param {string} pokemonName - pokemon name selected when user click pokemon card
-   * @returns {void}
-   */
-  const setSelectedPokemon = (pokemonName: string): void => {
-    registerPokemon(response.find(({ name }) => name === pokemonName));
-  };
+  const [tabSelection, registerTabSelection] = useState<number>(0);
 
   /**
    * Event Listener Poke Dialog
@@ -62,7 +49,7 @@ const Homepage: FC = () => {
           alt="Pokedex Apps"
         />
         <TabAction
-          active={0}
+          active={tabSelection}
           list={[
             {
               id: 0,
@@ -73,28 +60,28 @@ const Homepage: FC = () => {
               text: `My Pokemon`
             }
           ]}
-          on={(): void => undefined}
+          on={({ event, payload }): void => {
+            if (event === `on-change-index`) {
+              registerTabSelection(payload);
+            }
+          }}
         />
       </Header>
-      <div style={{ display: `flex`, flexWrap: `wrap` }}>
-        {response.map(({ ...res }) => (
-          <PokemonCard key={res.id} {...res} onClick={setSelectedPokemon} />
-        ))}
-      </div>
+      {tabSelection === 0 ? (
+        <PokemonList
+          on={({ event, payload }): void => {
+            if (event === `on-click`) registerPokemon(payload);
+          }}
+        />
+      ) : (
+        <p>Comming Soon</p>
+      )}
+
       <PokemonDialog
         pokemon={selectedPokemon}
         showDialog={verifiedIsNotEmpty(selectedPokemon)}
         on={eventListenerPokeDialog}
       />
-      <button
-        type="submit"
-        onClick={(e): void => {
-          e.preventDefault();
-          loadMore();
-        }}
-      >
-        Load More
-      </button>
     </>
   );
 };

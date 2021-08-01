@@ -1,14 +1,13 @@
 import {
+  IEvolutionItem,
+  IEvolutionItemLabel,
+  IEvolutionItemPokemon
+} from '@/library/features/pokemon-evolution/interface';
+import {
   IPokemonEvo,
   IPokemonEvoChain,
   IPokemonEvoDetail
 } from '@/library/interface/pokemon';
-
-import {
-  IEvolutionItem,
-  IEvolutionItemLabel,
-  IEvolutionItemPokemon
-} from '../interface';
 /**
  * Get ID Evolution
  * @param {string} url - evolution parameter
@@ -55,13 +54,59 @@ const generateEvolutionLabel = (
     name: ``
   };
 
-  evolutionDetails.slice(0, 1).forEach(({ min_level, trigger: { name } }) => {
-    response.name = name || `-`;
+  evolutionDetails
+    .slice(0, 1)
+    .forEach(
+      ({
+        held_item,
+        item,
+        known_move,
+        known_move_type,
+        location,
+        min_affection,
+        min_beauty,
+        min_happiness,
+        min_level,
+        time_of_day,
+        trigger: { name }
+      }) => {
+        response.name = name || `-`;
+        const attributes: string[] = [];
 
-    if (min_level) {
-      response.attributes = `Min Level ${min_level}`;
-    }
-  });
+        if (min_level) {
+          attributes.push(`Min Level ${min_level}`);
+        }
+        if (min_happiness) {
+          attributes.push(`Min Happines ${min_happiness}`);
+        }
+        if (min_affection) {
+          attributes.push(`Min Affection ${min_affection}`);
+        }
+        if (min_beauty) {
+          attributes.push(`Min Beauty ${min_beauty}`);
+        }
+        if (item) {
+          attributes.push(`${item?.name}`);
+        }
+        if (known_move) {
+          attributes.push(`Move ${known_move?.name}`);
+        }
+        if (known_move_type) {
+          attributes.push(`Know ${known_move_type?.name} Move`);
+        }
+        if (location) {
+          attributes.push(`Near ${location?.name}`);
+        }
+        if (held_item) {
+          attributes.push(`Held item ${held_item?.name}`);
+        }
+        if (time_of_day !== ``) {
+          attributes.push(`${time_of_day}time`);
+        }
+
+        response.attributes = attributes.join(`, `);
+      }
+    );
 
   return response;
 };

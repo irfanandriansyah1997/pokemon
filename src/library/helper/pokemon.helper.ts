@@ -1,4 +1,4 @@
-import { IPokemonFlavorTextEntries } from '../interface/pokemon';
+import { IPokemonFlavorTextEntries } from '@/library/interface/pokemon';
 
 /**
  * Generate Description Pokemon

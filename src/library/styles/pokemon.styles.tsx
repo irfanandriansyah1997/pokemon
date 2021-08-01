@@ -2,8 +2,8 @@ import { verifiedIsNotEmpty } from '@99/helper';
 import styled from '@emotion/styled';
 
 import Ability from '@/assets/images/ability.svg';
+import { IPokemonDialogBackdropProps } from '@/library/features/pokemon-detail/interface';
 
-import { IPokemonDialogBackdropProps } from '../features/pokemon-detail/interface';
 import { COLOR } from './constant';
 import { IPokemonContainerProps } from './interface';
 
@@ -309,4 +309,9 @@ export const PokeEvoLabel = styled.div({
     lineHeight: `20px`,
     marginBottom: 0
   }
+});
+
+export const PokeLoadMoreButton = styled.button({
+  background: `rgba(0, 0, 0, 0.2)`,
+  margin: `auto`
 });
