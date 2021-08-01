@@ -4,7 +4,7 @@ import styled from '@emotion/styled';
 import Ability from '@/assets/images/ability.svg';
 import { IPokemonDialogBackdropProps } from '@/library/features/pokemon-detail/interface';
 
-import { COLOR, FONT_SIZE } from './constant';
+import { COLOR } from './constant';
 import { IPokemonContainerProps } from './interface';
 
 export const PokemonDetailContainer = styled.div<IPokemonContainerProps>(
@@ -159,16 +159,7 @@ export const PokemonTopSectionDialog = styled.div<{ showSection: boolean }>(
     'p:nth-of-type(2)': {
       display: `inline-flex`,
       lineHeight: `48px`,
-      position: `relative`,
-      span: {
-        bottom: 0,
-        fontSize: FONT_SIZE.normal,
-        fontWeight: 400,
-        left: `100%`,
-        lineHeight: `40px`,
-        marginLeft: 10,
-        position: `absolute`
-      }
+      position: `relative`
     },
     padding: `24px 18px 0`,
     position: `absolute`,
