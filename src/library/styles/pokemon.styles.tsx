@@ -4,7 +4,7 @@ import styled from '@emotion/styled';
 import Ability from '@/assets/images/ability.svg';
 import { IPokemonDialogBackdropProps } from '@/library/features/pokemon-detail/interface';
 
-import { COLOR } from './constant';
+import { COLOR, FONT_SIZE } from './constant';
 import { IPokemonContainerProps } from './interface';
 
 export const PokemonDetailContainer = styled.div<IPokemonContainerProps>(
@@ -139,8 +139,9 @@ export const PokemonTopSectionDialog = styled.div<{ showSection: boolean }>(
     '.genus': {
       background: `rgba(0, 0, 0, 0.15)`,
       borderRadius: `20px`,
-      display: `inline-block`,
-      padding: `5px 10px`
+      display: `block`,
+      padding: `5px 10px`,
+      width: `fit-content`
     },
     '> div': {
       left: 0,
@@ -151,11 +152,23 @@ export const PokemonTopSectionDialog = styled.div<{ showSection: boolean }>(
     left: 0,
     opacity: showSection ? 1 : 0,
     p: {
+      display: `flex`,
       textShadow: `rgb(0 0 0 / 40%) 0px 2px 16px`,
       transition: `0.3s cubic-bezier(0.7, 0.3, 0, 1)`
     },
-    'p:first-of-type': {
-      marginBottom: -5
+    'p:nth-of-type(2)': {
+      display: `inline-flex`,
+      lineHeight: `48px`,
+      position: `relative`,
+      span: {
+        bottom: 0,
+        fontSize: FONT_SIZE.normal,
+        fontWeight: 400,
+        left: `100%`,
+        lineHeight: `40px`,
+        marginLeft: 10,
+        position: `absolute`
+      }
     },
     padding: `24px 18px 0`,
     position: `absolute`,
@@ -166,6 +179,9 @@ export const PokemonTopSectionDialog = styled.div<{ showSection: boolean }>(
 );
 
 export const PokemonCloseDialog = styled.section({
+  '.close': {
+    marginBottom: 0
+  },
   alignItems: `center`,
   background: `rgba(0, 0, 0, 0.15)`,
   borderRadius: `50%`,
@@ -173,9 +189,6 @@ export const PokemonCloseDialog = styled.section({
   height: 30,
   justifyContent: `center`,
   overflow: `hidden`,
-  'p:first-of-type': {
-    margin: 0
-  },
   position: `absolute`,
   right: 18,
   top: 18,
@@ -333,3 +346,34 @@ export const PokeLoadMoreButton = styled.button<{ loading: boolean }>(
     width: `calc(100% - 20px)`
   })
 );
+
+export const PokemonRegisterFAB = styled.button<{
+  active: boolean;
+  loading: boolean;
+  show: boolean;
+}>(({ active, loading, show }) => {
+  let opacity = 0;
+
+  if (show) {
+    if (loading) {
+      opacity = 0.5;
+    } else {
+      opacity = 1;
+    }
+  }
+
+  return {
+    background: COLOR.white,
+    border: `7px solid`,
+    borderColor: active ? COLOR.green : COLOR.red,
+    borderRadius: `50%`,
+    bottom: 20,
+    boxShadow: `0 0 2px rgb(40 41 61 / 8%), 0 4px 8px rgb(96 97 112 / 16%)`,
+    opacity,
+    padding: 1,
+    position: `fixed`,
+    right: 20,
+    transition: `0.3s cubic-bezier(0.7, 0.3, 0, 1)`,
+    zIndex: 10000000
+  };
+});

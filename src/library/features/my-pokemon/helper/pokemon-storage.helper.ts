@@ -89,14 +89,18 @@ const setPokemon = (param: IPokemon): IPokemon[] => {
 export const savedMyPokemon = (
   pokemon: IPokemon,
   customName: string
-): IPokemon[] => {
-  const isNotExist = pokemonIsNotExist(customName);
+): [IPokemon[], boolean] => {
+  try {
+    const isNotExist = pokemonIsNotExist(customName);
 
-  if (isNotExist) {
-    return setPokemon({ ...pokemon, customName });
+    if (isNotExist) {
+      return [setPokemon({ ...pokemon, customName }), true];
+    }
+
+    return [getPokemon(), false];
+  } catch {
+    return [getPokemon(), false];
   }
-
-  return getPokemon();
 };
 
 /**
@@ -106,18 +110,22 @@ export const savedMyPokemon = (
  * @author Irfan Andriansyah <irfan@99.co>
  * @since 2021.08.01
  */
-export const deleteMyPokemon = (name: string): IPokemon[] => {
-  const isExist = getPokemonByCustomName(name);
+export const deleteMyPokemon = (name: string): [IPokemon[], boolean] => {
+  try {
+    const isExist = getPokemonByCustomName(name);
 
-  if (isExist) {
-    const response = getPokemon().filter(
-      ({ customName }) => customName !== name
-    );
+    if (isExist) {
+      const response = getPokemon().filter(
+        ({ customName }) => customName !== name
+      );
 
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(response));
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(response));
 
-    return response;
+      return [response, true];
+    }
+
+    return [getPokemon(), false];
+  } catch (e) {
+    return [getPokemon(), false];
   }
-
-  return getPokemon();
 };

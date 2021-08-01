@@ -7,6 +7,7 @@ import {
   savedMyPokemon
 } from '@/library/features/my-pokemon/helper';
 import { IMyPokemonHooks } from '@/library/features/my-pokemon/interface';
+import { NullAble } from '@/library/interface/general';
 import { IPokemon } from '@/library/interface/pokemon';
 
 /**
@@ -25,23 +26,40 @@ export const useMyPokemon = (): IMyPokemonHooks => {
    * Register New Pokemon
    * @param {IPokemon} pokemon - new pokemon list
    * @param {string} customName - pokemon custom name
-   * @returns {void}
+   * @returns {NullAble<string>}
    */
-  const registerPokemon = (pokemon: IPokemon, customName: string) => {
-    setMyPokemon(savedMyPokemon(pokemon, customName));
+  const registerPokemon = (
+    pokemon: IPokemon,
+    customName: string
+  ): NullAble<string> => {
+    const [response, isSuccess] = savedMyPokemon(pokemon, customName);
+    setMyPokemon(response);
+
+    if (isSuccess) return customName;
+
+    return undefined;
   };
 
   /**
    * Delete New Pokemon
    * @param {string} customName - pokemon custom name
-   * @returns {void}
+   * @returns {boolean}
    */
-  const releasePokemon = (customName: string) => {
-    setMyPokemon(deleteMyPokemon(customName));
+  const releasePokemon = (customName: string): boolean => {
+    const [response, isSuccess] = deleteMyPokemon(customName);
+    setMyPokemon(response);
+
+    return isSuccess;
   };
 
   return {
     action: {
+      enableToCatch: () =>
+        new Promise<boolean>((resolve) => {
+          setTimeout(() => {
+            resolve(Math.random() < 0.8);
+          }, Math.random() * 2000);
+        }),
       registerPokemon,
       releasePokemon
     },

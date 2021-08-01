@@ -5,9 +5,7 @@ export type IEventOnClose = IEventComponent<'on-close'>;
 
 export type IEventOnRelease = IEventComponent<'on-release'>;
 
-export type IPokemonDialogEvent = (
-  event: IEventOnClose | IEventOnRelease
-) => void;
+export type IPokemonDialogEvent = (event: IEventOnClose) => void;
 
 export type IPokemonTopSectionEvent = (event: IEventOnClose) => void;
 
@@ -39,6 +37,7 @@ export interface IPokemonDialogBackdropProps {
  * @since 2021.07.31
  */
 export interface IPokemonTopSectionProps {
+  customName?: string;
   genus: string;
   id: string;
   name: string;
