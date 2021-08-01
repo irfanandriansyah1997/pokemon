@@ -9,6 +9,30 @@ import {
   ITextProps
 } from './interface';
 
+export const Header = styled.div({
+  '> div': {
+    height: 50
+  },
+  alignItems: `center`,
+  background: COLOR.white,
+  display: `flex`,
+  flexDirection: `column`,
+  img: {
+    background: `rgba(0,0,0,0.05)`,
+    height: 50,
+    objectFit: `contain`,
+    padding: `20px`,
+    width: `100%`
+  },
+  justifyContent: `center`,
+  marginBottom: 20,
+
+  position: `fixed`,
+  top: 0,
+  width: `100vw`,
+  zIndex: 100
+});
+
 export const Grid = styled.div<Partial<IGridProps>>(
   ({ templates = [`auto`, `auto`], rowGap = 12 }) => ({
     alignItems: `center`,
