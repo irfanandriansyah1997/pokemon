@@ -3,7 +3,11 @@ import { FC } from 'react';
 import PokemonCard from '@/library/features/pokemon-list/component/pokemon-card';
 import { usePokemonList } from '@/library/features/pokemon-list/hooks';
 import { IPokemonListProps } from '@/library/features/pokemon-list/interface';
-import { PokeLoadMoreButton } from '@/library/styles/pokemon.styles';
+import { Text } from '@/library/styles/general.styles';
+import {
+  PokeListingSection,
+  PokeLoadMoreButton
+} from '@/library/styles/pokemon.styles';
 
 /**
  * Pokemon List Component
@@ -13,7 +17,7 @@ import { PokeLoadMoreButton } from '@/library/styles/pokemon.styles';
 const PokemonList: FC<IPokemonListProps> = ({ on }) => {
   const {
     action: { loadMore },
-    state: { response }
+    state: { loading, response }
   } = usePokemonList();
 
   /**
@@ -31,13 +35,14 @@ const PokemonList: FC<IPokemonListProps> = ({ on }) => {
   };
 
   return (
-    <>
+    <PokeListingSection>
       <div
         style={{
           display: `flex`,
           flexDirection: `column`,
           margin: `auto`,
-          maxWidth: 500
+          maxWidth: 500,
+          width: `100%`
         }}
       >
         {response.map(({ ...res }) => (
@@ -45,15 +50,18 @@ const PokemonList: FC<IPokemonListProps> = ({ on }) => {
         ))}
       </div>
       <PokeLoadMoreButton
+        loading={loading}
         type="submit"
         onClick={(e): void => {
           e.preventDefault();
           loadMore();
         }}
       >
-        Load More
+        <Text color="white" fontWeight={500} textAlign="center">
+          Load More
+        </Text>
       </PokeLoadMoreButton>
-    </>
+    </PokeListingSection>
   );
 };
 

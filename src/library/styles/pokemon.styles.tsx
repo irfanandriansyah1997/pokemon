@@ -311,7 +311,25 @@ export const PokeEvoLabel = styled.div({
   }
 });
 
-export const PokeLoadMoreButton = styled.button({
-  background: `rgba(0, 0, 0, 0.2)`,
-  margin: `auto`
+export const PokeListingSection = styled.div({
+  alignItems: `center`,
+  display: `flex`,
+  flexDirection: `column`,
+  justifyContent: `center`
 });
+
+export const PokeLoadMoreButton = styled.button<{ loading: boolean }>(
+  ({ loading }) => ({
+    background: `rgba(0, 0, 0, 0.4)`,
+    border: 0,
+    borderRadius: 50,
+    margin: 20,
+    maxWidth: 500,
+    opacity: loading ? 0 : 1,
+    padding: 10,
+    textAlign: `center`,
+    transform: loading ? `translateY(100%)` : `translateY(0%)`,
+    transition: `0.3s cubic-bezier(0.7, 0.3, 0, 1)`,
+    width: `calc(100% - 20px)`
+  })
+);
