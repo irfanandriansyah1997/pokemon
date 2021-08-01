@@ -219,7 +219,7 @@ const PokemonDialog: FC<IPokemonDialogProps> = ({ on, showDialog, ...res }) => {
         color={loading ? `#ddd` : color}
       />
       <PokemonRegisterDialog
-        pokemon={pokemon}
+        pokemon={res.pokemon}
         saved={verifiedIsNotEmpty(customName)}
         show={showBackdrop}
         on={onChangeStateRegister}

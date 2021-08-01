@@ -29,6 +29,7 @@ export interface IPokemonDialogBackdropProps {
   backgroundImage?: string;
   color?: string;
   show?: boolean;
+  zIndex?: number;
 }
 
 /**

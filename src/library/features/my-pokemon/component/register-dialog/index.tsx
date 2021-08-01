@@ -6,6 +6,8 @@ import { useMyPokemonContext } from '@/library/features/my-pokemon/hooks/my-poke
 import { IRegisterPokemonProps } from '@/library/features/my-pokemon/interface';
 import { PokemonRegisterFAB } from '@/library/styles/pokemon.styles';
 
+import FormRegistrationDialog from '../form-register-dialog';
+
 /**
  * Pokemon Register Dialog
  * @author Irfan Andriansyah <irfan@99.co>
@@ -21,6 +23,7 @@ const PokemonRegisterDialog: FC<IRegisterPokemonProps> = ({
     action: { enableToCatch, registerPokemon, releasePokemon }
   } = useMyPokemonContext();
   const [loading, setLoading] = useState(false);
+  const [formDialog, setFormDialog] = useState(false);
 
   if (!pokemon) return null;
 
@@ -61,6 +64,8 @@ const PokemonRegisterDialog: FC<IRegisterPokemonProps> = ({
    */
   const onClickButton = (): void => {
     if (pokemon) {
+      setFormDialog(true);
+
       if (!saved) {
         setLoading(true);
         enableToCatch().then((item) => {
@@ -86,6 +91,11 @@ const PokemonRegisterDialog: FC<IRegisterPokemonProps> = ({
       >
         <PokeBall />
       </PokemonRegisterFAB>
+      <FormRegistrationDialog
+        on={() => setFormDialog(false)}
+        show={formDialog}
+        title="Daftar"
+      />
     </>
   );
 };
