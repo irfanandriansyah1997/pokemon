@@ -1,3 +1,4 @@
+import { verifiedIsNotEmpty } from '@99/helper';
 import styled from '@emotion/styled';
 
 import Ability from '@/assets/images/ability.svg';
@@ -108,43 +109,162 @@ export const PokemonTrainingCard = styled.div`
 `;
 
 export const PokemonBackdropStyle = styled.div<IPokemonDialogBackdropProps>(
-  ({ color, show }) => ({
-    background: `${
-      show ? color || `rgba(255,255,255,0.5)` : `rgba(255,255,255,0.5)`
-    }`,
-    height: `100%`,
+  ({ backgroundImage, color, show }) => {
+    let background = ``;
+    if (verifiedIsNotEmpty(backgroundImage)) {
+      background = `url('${backgroundImage}') repeat`;
+    } else {
+      background = `${
+        show ? color || `rgba(255,255,255,0.15)` : `rgba(255,255,255,0.15)`
+      }`;
+    }
+
+    return {
+      background,
+      height: `100%`,
+      left: 0,
+      opacity: verifiedIsNotEmpty(backgroundImage) ? 0.4 : 1,
+      position: `fixed`,
+      top: 0,
+      transition: `0.3s cubic-bezier(0.7, 0.3, 0, 1)`,
+      visibility: show ? `visible` : `hidden`,
+      width: `100%`,
+      zIndex: 999
+    };
+  }
+);
+
+export const PokemonTopSectionDialog = styled.div<{ showSection: boolean }>(
+  ({ showSection }) => ({
+    '.genus': {
+      background: `rgba(0, 0, 0, 0.15)`,
+      borderRadius: `20px`,
+      display: `inline-block`,
+      padding: `5px 10px`
+    },
+    '> div': {
+      left: 0,
+      position: `absolute`,
+      top: 30,
+      width: `100vw`
+    },
     left: 0,
-    position: `fixed`,
+    opacity: showSection ? 1 : 0,
+    p: {
+      textShadow: `rgb(0 0 0 / 40%) 0px 2px 16px`,
+      transition: `0.3s cubic-bezier(0.7, 0.3, 0, 1)`
+    },
+    'p:first-of-type': {
+      marginBottom: -5
+    },
+    padding: `24px 18px 0`,
+    position: `absolute`,
     top: 0,
     transition: `0.3s cubic-bezier(0.7, 0.3, 0, 1)`,
-    visibility: show ? `visible` : `hidden`,
-    width: `100%`,
-    zIndex: 999
+    width: `calc(100vw - 36px)`
   })
 );
 
-export const PokemonTopSectionDialog = styled.div({
-  '> div': {
-    left: 0,
-    position: `absolute`,
-    top: 30,
-    width: `100vw`
-  },
-  left: 0,
-  p: {
-    transition: `0.3s cubic-bezier(0.7, 0.3, 0, 1)`
-  },
+export const PokemonCloseDialog = styled.section({
+  alignItems: `center`,
+  background: `rgba(0, 0, 0, 0.15)`,
+  borderRadius: `50%`,
+  display: `flex`,
+  height: 30,
+  justifyContent: `center`,
+  overflow: `hidden`,
   'p:first-of-type': {
-    marginBottom: -5
+    margin: 0
   },
-  'p:last-of-type': {
-    background: `rgba(255, 255, 255, 0.25)`,
-    borderRadius: `20px`,
-    display: `inline-block`,
-    padding: `5px 10px`
-  },
-  padding: `24px 18px 0`,
   position: `absolute`,
-  top: 0,
-  width: `100vw`
+  right: 18,
+  top: 18,
+  width: 30,
+  zIndex: 100
 });
+
+export const PokemonCardContainer = styled.div<{ color: string }>(
+  ({ color }) => ({
+    '&::after': {
+      background: `rgba(0,0,0,0.1)`,
+      clipPath: `polygon(0 0, 100% 0%, 79% 100%, 0% 100%)`,
+      content: `''`,
+      height: `130px`,
+      left: 0,
+      position: `absolute`,
+      top: `50%`,
+      transform: `translateY(-50%)`,
+      width: `130px`
+    },
+    '&::before': {
+      background: `rgba(255,255,255,0.15)`,
+      content: `''`,
+      height: `100%`,
+      left: 0,
+      position: `absolute`,
+      top: 0,
+      width: `100%`
+    },
+    '.poke-ball': {
+      bottom: 10,
+      position: `absolute`,
+      right: 10
+    },
+    '.pokemon-text': {
+      left: 140
+    },
+    '.pokemon-text, > div img': {
+      position: `absolute`,
+      top: `50%`,
+      transform: `translateY(-50%)`
+    },
+    '> div': {
+      height: `100%`,
+      img: {
+        height: 100,
+        objectFit: `contain`,
+        width: 100
+      },
+      left: 0,
+      position: `absolute`,
+      top: 0,
+      width: `100%`,
+      zIndex: 1
+    },
+    background: color,
+    borderRadius: 10,
+    height: 100,
+    margin: `10px`,
+    minWidth: `calc(100% - 20px)`,
+    overflow: `hidden`,
+    position: `relative`
+  })
+);
+
+export const PokeBallContainer = styled.div<{ active: boolean }>(() => ({
+  '&::after': {
+    background: COLOR.red,
+    border: `2px solid ${COLOR.white}`,
+    borderRadius: `50%`,
+    height: 6,
+    width: 6
+  },
+  '&::before': {
+    background: COLOR.white,
+    height: `2px`,
+    width: `100%`
+  },
+  '&::before, &::after': {
+    content: `''`,
+    left: `50%`,
+    position: `absolute`,
+    top: `50%`,
+    transform: `translate(-50%, -50%)`
+  },
+  background: COLOR.red,
+  border: `2px solid #fff`,
+  borderRadius: `50%`,
+  height: 25,
+  position: `relative`,
+  width: 25
+}));

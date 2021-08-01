@@ -1,5 +1,7 @@
 import styled from '@emotion/styled';
 
+import Next from '@/assets/images/next.svg';
+import Prev from '@/assets/images/prev.svg';
 import { ICarouselWrapper } from '@/library/component/carousel/interface';
 import { COLOR } from '@/library/styles/constant';
 
@@ -43,8 +45,8 @@ export const CarouselItem = styled.div({
 
 export const CarouselPrev = styled.div<{ show: boolean }>(({ show }) => ({
   '&::before': {
-    borderBottom: `2px solid ${COLOR.secondary}`,
-    borderLeft: `2px solid ${COLOR.secondary}`,
+    background: `url(${Prev}) no-repeat`,
+    backgroundSize: `10px 10px`,
     content: `''`,
     height: 10,
     left: `50%`,
@@ -64,7 +66,7 @@ export const CarouselPrev = styled.div<{ show: boolean }>(({ show }) => ({
   left: 10,
   opacity: show ? 1 : 0,
   position: `absolute`,
-  top: `50%`,
+  top: `60%`,
   transform: `translateY(-50%)`,
   transition: `all .3s cubic-bezier(0.645, 0.045, 0.355, 1)`,
   width: 45
@@ -72,8 +74,8 @@ export const CarouselPrev = styled.div<{ show: boolean }>(({ show }) => ({
 
 export const CarouselNext = styled.div<{ show: boolean }>(({ show }) => ({
   '&::before': {
-    borderBottom: `2px solid ${COLOR.secondary}`,
-    borderLeft: `2px solid ${COLOR.secondary}`,
+    background: `url(${Next}) no-repeat`,
+    backgroundSize: `10px 10px`,
     content: `''`,
     height: 10,
     left: `50%`,
@@ -93,7 +95,7 @@ export const CarouselNext = styled.div<{ show: boolean }>(({ show }) => ({
   opacity: show ? 1 : 0,
   position: `absolute`,
   right: 10,
-  top: `50%`,
+  top: `60%`,
   transform: `translate(-50%, -50%)`,
   transition: `all .3s cubic-bezier(0.645, 0.045, 0.355, 1)`,
   width: 45

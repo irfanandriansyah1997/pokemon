@@ -29,3 +29,13 @@ export const getDescriptionText = (
       return false;
     }
   )?.flavor_text || ``;
+
+/**
+ * Formatted Pokemon ID
+ * @param {string} id - pokemon ID
+ * @returns {string}
+ * @author Irfan Andriansyah <irfan@99.co>
+ * @since 2021.08.01
+ */
+export const formattedPokemonID = (id: string): string =>
+  `#${id.toString().padStart(3, `0`)}`;
