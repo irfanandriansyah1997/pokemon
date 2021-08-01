@@ -237,7 +237,8 @@ export const PokemonCardContainer = styled.div<{ color: string }>(
     margin: `10px`,
     minWidth: `calc(100% - 20px)`,
     overflow: `hidden`,
-    position: `relative`
+    position: `relative`,
+    transition: `0.3s cubic-bezier(0.7, 0.3, 0, 1)`
   })
 );
 
