@@ -13,6 +13,7 @@ import {
  * @since 2021.07.30
  */
 export interface IPokemon extends Partial<IPokemonOptional> {
+  customName?: string;
   id: number;
   image: string;
   name: string;
