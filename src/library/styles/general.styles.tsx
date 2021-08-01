@@ -1,3 +1,4 @@
+import { verifiedIsNotEmpty } from '@99/helper';
 import styled from '@emotion/styled';
 
 import { COLOR, FONT_SIZE, PRIMARY_FONT } from './constant';
@@ -56,12 +57,14 @@ export const Heading = styled.p<IHeadingProps>(
   })
 );
 
-export const Badge = styled.div({
-  backgroundColor: `rgba(0, 0, 0, 0.25)`,
+export const Badge = styled.div<{ color?: string }>(({ color }) => ({
+  backgroundColor: verifiedIsNotEmpty(color)
+    ? `${color}`
+    : `rgba(0, 0, 0, 0.25)`,
   borderRadius: 20,
   color: COLOR.white,
   fontFamily: PRIMARY_FONT,
   fontSize: FONT_SIZE.text,
   fontWeight: 400,
   padding: `5px 10px`
-});
+}));

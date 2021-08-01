@@ -1,13 +1,20 @@
 import { FC, MouseEventHandler } from 'react';
+import { usePalette } from 'react-palette';
 
+import { formattedPokemonID } from '@/helper/pokemon.helper';
+import PokeBall from '@/library/component/pokeball';
 import { IPokemonCardProps } from '@/library/features/pokemon-list/interface';
+import { Text } from '@/library/styles/general.styles';
+import { PokemonCardContainer } from '@/library/styles/pokemon.styles';
 
 /**
  * Pokemon Card Component
  * @author Irfan Andriansyah <irfan@99.co>
  * @since 2021.07.30
  */
-const PokemonCard: FC<IPokemonCardProps> = ({ image, name, onClick }) => {
+const PokemonCard: FC<IPokemonCardProps> = ({ id, image, name, onClick }) => {
+  const { data } = usePalette(image);
+
   /**
    * On Click Card
    * @returns {void}
@@ -19,26 +26,26 @@ const PokemonCard: FC<IPokemonCardProps> = ({ image, name, onClick }) => {
   };
 
   return (
-    <div
+    <PokemonCardContainer
       tabIndex={0}
+      color={data.vibrant || `#ddd`}
       role="button"
       onClick={onClickCard}
       onKeyPress={(): void => undefined}
-      style={{
-        alignItems: `center`,
-        background: `#fafafa`,
-        borderRadius: 10,
-        display: `flex`,
-        flexDirection: `column`,
-        height: 100,
-        justifyContent: `center`,
-        margin: `10px`,
-        minWidth: `calc(50vw - 30px)`
-      }}
     >
-      <img style={{ width: 50 }} alt={`${name}`} src={`${image}`} />
-      {name}
-    </div>
+      <div>
+        <img alt={`Pokemon ${name}`} src={`${image}`} />
+        <div className="pokemon-text">
+          <Text fontSize="large" fontWeight={700} color="white">
+            {formattedPokemonID(`${id}`)}
+          </Text>
+          <Text fontSize="normal" fontWeight={400} color="white">
+            {name}
+          </Text>
+        </div>
+        <PokeBall />
+      </div>
+    </PokemonCardContainer>
   );
 };
 

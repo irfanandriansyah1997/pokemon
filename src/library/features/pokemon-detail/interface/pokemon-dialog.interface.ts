@@ -9,6 +9,8 @@ export type IPokemonDialogEvent = (
   event: IEventOnClose | IEventOnRelease
 ) => void;
 
+export type IPokemonTopSectionEvent = (event: IEventOnClose) => void;
+
 /**
  * Pokemon Dialog Props
  * @author Irfan Andriansyah <irfan@99.co>
@@ -26,6 +28,7 @@ export interface IPokemonDialogProps {
  * @since 2021.07.31
  */
 export interface IPokemonDialogBackdropProps {
+  backgroundImage?: string;
   color?: string;
   show?: boolean;
 }
@@ -39,6 +42,7 @@ export interface IPokemonTopSectionProps {
   genus: string;
   id: string;
   name: string;
+  on: IPokemonTopSectionEvent;
   showImage?: boolean;
   showWrapper?: boolean;
   sprite?: IPokemonSprites;

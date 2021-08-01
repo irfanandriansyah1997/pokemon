@@ -1,9 +1,14 @@
+import { verifiedIsNotEmpty } from '@99/helper';
 import { FC } from 'react';
 
+import { formattedPokemonID } from '@/helper/pokemon.helper';
 import Carousel from '@/library/component/carousel';
 import { IPokemonTopSectionProps } from '@/library/features/pokemon-detail/interface';
 import { Text } from '@/library/styles/general.styles';
-import { PokemonTopSectionDialog } from '@/library/styles/pokemon.styles';
+import {
+  PokemonCloseDialog,
+  PokemonTopSectionDialog
+} from '@/library/styles/pokemon.styles';
 
 /**
  * Pokemon Top Section
@@ -14,13 +19,34 @@ const PokemonTopSection: FC<IPokemonTopSectionProps> = ({
   genus,
   id,
   name,
+  on,
   showImage,
   showWrapper,
   sprite
 }) => (
-  <PokemonTopSectionDialog>
-    <Text color={showWrapper ? `white` : `secondary`} fontSize="text">
-      #{id.toString().padStart(3, `0`)}
+  <PokemonTopSectionDialog showSection={showWrapper || false}>
+    <PokemonCloseDialog
+      onClick={(e) => {
+        e.preventDefault();
+        on({
+          event: `on-close`
+        });
+      }}
+    >
+      <Text
+        color={showWrapper ? `white` : `secondary`}
+        fontSize="normal"
+        fontWeight={400}
+      >
+        x
+      </Text>
+    </PokemonCloseDialog>
+    <Text
+      color={showWrapper ? `white` : `secondary`}
+      fontSize="normal"
+      fontWeight={500}
+    >
+      {formattedPokemonID(id)}
     </Text>
     <Text
       color={showWrapper ? `white` : `secondary`}
@@ -29,9 +55,15 @@ const PokemonTopSection: FC<IPokemonTopSectionProps> = ({
     >
       {name}
     </Text>
-    <Text color={showWrapper ? `white` : `secondary`} fontSize="text">
-      {genus}
-    </Text>
+    {verifiedIsNotEmpty(genus) && (
+      <Text
+        className="genus"
+        color={showWrapper ? `white` : `secondary`}
+        fontSize="text"
+      >
+        {genus}
+      </Text>
+    )}
     {sprite && (
       <Carousel
         showCarousel={showImage || false}

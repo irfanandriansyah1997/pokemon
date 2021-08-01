@@ -3,6 +3,7 @@ import { useQuery } from '@apollo/client';
 import { FC, ReactNode, useEffect, useState } from 'react';
 import Loadable from 'react-loadable';
 import Sheet from 'react-modal-sheet';
+import { usePalette } from 'react-palette';
 
 import { QueryPokemonArgs as Args } from '@/contract/graphql';
 import TabAction from '@/library/component/tab-action';
@@ -46,8 +47,11 @@ const PokemonDialog: FC<IPokemonDialogProps> = ({ on, showDialog, ...res }) => {
   } = usePokemonDetail();
   const [enableScroll, setEnableScroll] = useState(false);
   const [showBackdrop, toggleShowBackdrop] = useState(false);
-  const { id, name, pokeSpecies, sprites } = pokemon || {};
-  const { color, genera = [] } = pokeSpecies || {};
+  const { id, image, name, pokeSpecies, sprites } = pokemon || {};
+  const { genera = [] } = pokeSpecies || {};
+  const {
+    data: { vibrant: color = `#ddd` }
+  } = usePalette(image || ``);
 
   useEffect(() => {
     if (showDialog && document) {
@@ -88,6 +92,7 @@ const PokemonDialog: FC<IPokemonDialogProps> = ({ on, showDialog, ...res }) => {
   const onCloseDialog = (): void => {
     setPokemon(undefined);
     setSelection(0);
+    toggleShowBackdrop(false);
 
     on({
       event: `on-close`
@@ -152,7 +157,7 @@ const PokemonDialog: FC<IPokemonDialogProps> = ({ on, showDialog, ...res }) => {
     <>
       <PokemonDialogBackdrop
         show={showBackdrop}
-        color={loading ? `#ddd` : (color?.name as string)}
+        color={loading ? `#ddd` : color}
       />
       <Sheet
         isOpen={showDialog}
@@ -186,9 +191,10 @@ const PokemonDialog: FC<IPokemonDialogProps> = ({ on, showDialog, ...res }) => {
           {pokemon ? (
             <PokemonTopSection
               id={`${id}`}
+              on={onCloseDialog}
               showImage={!enableScroll}
               name={name as string}
-              showWrapper={!loading}
+              showWrapper={showBackdrop}
               genus={
                 genera.find(
                   ({ language }) =>
