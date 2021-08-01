@@ -2,16 +2,12 @@ import { verifiedIsNotEmpty } from '@99/helper';
 import { FC, useState } from 'react';
 import Loadable from 'react-loadable';
 
+import { useMyPokemonContext } from '@/library/features/my-pokemon/hooks/my-pokemon.hooks';
 import { IPokemonDialogEvent } from '@/library/features/pokemon-detail/interface';
 import PokemonCard from '@/library/features/pokemon-list/component/pokemon-card';
-import { usePokemonList } from '@/library/features/pokemon-list/hooks';
 import { NullAble } from '@/library/interface/general';
 import { IPokemon } from '@/library/interface/pokemon';
-import { Text } from '@/library/styles/general.styles';
-import {
-  PokeListingSection,
-  PokeLoadMoreButton
-} from '@/library/styles/pokemon.styles';
+import { PokeListingSection } from '@/library/styles/pokemon.styles';
 
 const PokemonDialog = Loadable({
   loader: () =>
@@ -24,12 +20,12 @@ const PokemonDialog = Loadable({
  * @author Irfan Andriansyah <irfan@99.co>
  * @since 2021.08.01
  */
-const PokemonList: FC = () => {
+const MyPokemonList: FC = () => {
   const [selectedPokemon, registerPokemon] = useState<NullAble<IPokemon>>();
+
   const {
-    action: { loadMore },
-    state: { loading, response: pokemon }
-  } = usePokemonList();
+    state: { pokemon }
+  } = useMyPokemonContext();
 
   /**
    * Event Listener Poke Dialog
@@ -73,18 +69,6 @@ const PokemonList: FC = () => {
           <PokemonCard key={res.id} {...res} onClick={setSelectedPokemon} />
         ))}
       </div>
-      <PokeLoadMoreButton
-        loading={loading}
-        type="submit"
-        onClick={(e): void => {
-          e.preventDefault();
-          loadMore();
-        }}
-      >
-        <Text color="white" fontWeight={500} textAlign="center">
-          Load More
-        </Text>
-      </PokeLoadMoreButton>
       <PokemonDialog
         pokemon={selectedPokemon}
         showDialog={verifiedIsNotEmpty(selectedPokemon)}
@@ -94,4 +78,4 @@ const PokemonList: FC = () => {
   );
 };
 
-export default PokemonList;
+export default MyPokemonList;

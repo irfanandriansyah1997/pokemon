@@ -1,3 +1,4 @@
+import { verifiedIsNotEmpty } from '@99/helper';
 import { FC, MouseEventHandler } from 'react';
 import { usePalette } from 'react-palette';
 
@@ -12,7 +13,13 @@ import { PokemonCardContainer } from '@/library/styles/pokemon.styles';
  * @author Irfan Andriansyah <irfan@99.co>
  * @since 2021.07.30
  */
-const PokemonCard: FC<IPokemonCardProps> = ({ id, image, name, onClick }) => {
+const PokemonCard: FC<IPokemonCardProps> = ({
+  customName,
+  id,
+  image,
+  name,
+  onClick
+}) => {
   const { data } = usePalette(image);
 
   /**
@@ -40,7 +47,7 @@ const PokemonCard: FC<IPokemonCardProps> = ({ id, image, name, onClick }) => {
             {formattedPokemonID(`${id}`)}
           </Text>
           <Text fontSize="normal" fontWeight={400} color="white">
-            {name}
+            {verifiedIsNotEmpty(customName) ? `${customName}` : name}
           </Text>
         </div>
         <PokeBall />

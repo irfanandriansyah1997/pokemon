@@ -56,7 +56,6 @@ const PokemonTopSection: FC<IPokemonTopSectionProps> = ({
       fontWeight={600}
     >
       {verifiedIsNotEmpty(customName) ? customName : name}
-      {verifiedIsNotEmpty(customName) && <span>({name})</span>}
     </Text>
     {verifiedIsNotEmpty(genus) && (
       <Text
