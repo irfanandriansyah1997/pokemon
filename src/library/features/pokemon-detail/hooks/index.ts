@@ -1,5 +1,6 @@
 import { useEffect, useReducer, useRef } from 'react';
 
+import { getSpeciesAPI } from '@/library/features/pokemon-detail/helper';
 import {
   IPokemonDetailHooks,
   IPokemonDetailReducer,
@@ -12,8 +13,6 @@ import {
   IPokemonBase,
   IPokemonSpecies
 } from '@/library/interface/pokemon';
-
-import { getSpeciesAPI } from '../helper';
 
 /**
  * Pokemon Detail Hooks

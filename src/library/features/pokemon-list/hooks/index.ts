@@ -3,6 +3,7 @@ import { useState } from 'react';
 
 import { QueryPokemonsArgs as Args } from '@/contract/graphql';
 import { DEFAULT_ARGS_POKEMON_LIST } from '@/library/features/pokemon-list/constant';
+import { translatePokemonItem } from '@/library/features/pokemon-list/helper';
 import { IPokemonListHooks } from '@/library/features/pokemon-list/interface';
 import { usePagination } from '@/library/hooks/pagination';
 import { NullAble } from '@/library/interface/general/type-checking.interface';
@@ -10,8 +11,6 @@ import { IBaseQueryError, PickGQL } from '@/library/interface/gql';
 import { IPokemon } from '@/library/interface/pokemon';
 import { POKEMON_LIST_QUERY } from '@/library/query';
 import { translateApolloError } from '@/modules/graphql/helper';
-
-import { translatePokemonItem } from '../helper';
 
 /**
  * Pokemon List Hooks
