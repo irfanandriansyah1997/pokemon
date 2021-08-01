@@ -16,6 +16,7 @@ import {
  * @since 2021.07.31
  */
 const PokemonTopSection: FC<IPokemonTopSectionProps> = ({
+  customName,
   genus,
   id,
   name,
@@ -34,6 +35,7 @@ const PokemonTopSection: FC<IPokemonTopSectionProps> = ({
       }}
     >
       <Text
+        className="close"
         color={showWrapper ? `white` : `secondary`}
         fontSize="normal"
         fontWeight={400}
@@ -53,7 +55,8 @@ const PokemonTopSection: FC<IPokemonTopSectionProps> = ({
       fontSize="title"
       fontWeight={600}
     >
-      {name}
+      {verifiedIsNotEmpty(customName) ? customName : name}
+      {verifiedIsNotEmpty(customName) && <span>({name})</span>}
     </Text>
     {verifiedIsNotEmpty(genus) && (
       <Text

@@ -1,3 +1,4 @@
+import { NullAble } from '@/library/interface/general';
 import { IPokemon } from '@/library/interface/pokemon';
 
 /**
@@ -16,8 +17,9 @@ export interface IMyPokemonHooks {
  * @since 2021.08.01
  */
 export interface IMyPokemonHooksAction {
-  registerPokemon(pokemon: IPokemon, customName: string): void;
-  releasePokemon(customName: string): void;
+  enableToCatch(): Promise<boolean>;
+  registerPokemon(pokemon: IPokemon, customName: string): NullAble<string>;
+  releasePokemon(customName: string): boolean;
 }
 
 /**

@@ -9,6 +9,8 @@ import { QueryPokemonArgs as Args } from '@/contract/graphql';
 import TabAction from '@/library/component/tab-action';
 import { ITabActionEvent } from '@/library/component/tab-action/interface';
 import { POKEMON_TAB_ITEM } from '@/library/constant/pokemon';
+import PokemonRegisterDialog from '@/library/features/my-pokemon/component/register-dialog';
+import { IRegisterPokemonEvent } from '@/library/features/my-pokemon/interface';
 import { usePokemonDetail } from '@/library/features/pokemon-detail/hooks';
 import {
   IPokemonDialogProps,
@@ -55,7 +57,7 @@ const PokemonDialog: FC<IPokemonDialogProps> = ({ on, showDialog, ...res }) => {
   } = usePokemonDetail();
   const [enableScroll, setEnableScroll] = useState(false);
   const [showBackdrop, toggleShowBackdrop] = useState(false);
-  const { id, image, name, pokeSpecies, sprites } = pokemon || {};
+  const { customName, id, image, name, pokeSpecies, sprites } = pokemon || {};
   const { genera = [] } = pokeSpecies || {};
   const {
     data: { vibrant: color = `#ddd` }
@@ -175,11 +177,52 @@ const PokemonDialog: FC<IPokemonDialogProps> = ({ on, showDialog, ...res }) => {
     }
   };
 
+  /**
+   * Event Handler On Change State From Register
+   * @param {IEventOnSave | IEventOnRelease} event - event when user change register pokemon
+   * @returns {void}
+   */
+  const onChangeStateRegister: IRegisterPokemonEvent = ({
+    event,
+    payload
+  }): void => {
+    switch (event) {
+      case `on-save`: {
+        if (pokemon)
+          setPokemon({
+            ...pokemon,
+            customName: payload as string
+          });
+        break;
+      }
+
+      case `on-release`: {
+        if (pokemon)
+          setPokemon({
+            ...pokemon,
+            customName: undefined
+          });
+
+        onCloseDialog()();
+        break;
+      }
+
+      default:
+        break;
+    }
+  };
+
   return (
     <>
       <PokemonDialogBackdrop
         show={showBackdrop}
         color={loading ? `#ddd` : color}
+      />
+      <PokemonRegisterDialog
+        pokemon={pokemon}
+        saved={verifiedIsNotEmpty(customName)}
+        show={showBackdrop}
+        on={onChangeStateRegister}
       />
       <Sheet
         isOpen={showDialog}
@@ -216,6 +259,7 @@ const PokemonDialog: FC<IPokemonDialogProps> = ({ on, showDialog, ...res }) => {
               on={onCloseDialog(true)}
               showImage={!enableScroll}
               name={name as string}
+              customName={customName}
               showWrapper={showBackdrop}
               genus={
                 genera.find(
