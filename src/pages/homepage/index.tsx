@@ -3,6 +3,7 @@ import { FC, useState } from 'react';
 import Loadable from 'react-loadable';
 
 import TabAction from '@/library/component/tab-action';
+import MyPokemonProvider from '@/library/features/my-pokemon';
 import { IPokemonDialogEvent as DialogEvent } from '@/library/features/pokemon-detail/interface';
 import PokemonList from '@/library/features/pokemon-list/component/pokemon-listing';
 import { NullAble } from '@/library/interface/general';
@@ -41,7 +42,7 @@ const Homepage: FC = () => {
   };
 
   return (
-    <>
+    <MyPokemonProvider>
       <Header>
         <img
           loading="lazy"
@@ -82,7 +83,7 @@ const Homepage: FC = () => {
         showDialog={verifiedIsNotEmpty(selectedPokemon)}
         on={eventListenerPokeDialog}
       />
-    </>
+    </MyPokemonProvider>
   );
 };
 
