@@ -4,7 +4,7 @@ import styled from '@emotion/styled';
 import Ability from '@/assets/images/ability.svg';
 import { IPokemonDialogBackdropProps } from '@/library/features/pokemon-detail/interface';
 
-import { COLOR } from './constant';
+import { COLOR, FONT_SIZE, PRIMARY_FONT } from './constant';
 import { IPokemonContainerProps } from './interface';
 
 export const PokemonDetailContainer = styled.div<IPokemonContainerProps>(
@@ -109,7 +109,7 @@ export const PokemonTrainingCard = styled.div`
 `;
 
 export const PokemonBackdropStyle = styled.div<IPokemonDialogBackdropProps>(
-  ({ backgroundImage, color, show }) => {
+  ({ backgroundImage, color, show, zIndex }) => {
     let background = ``;
     if (verifiedIsNotEmpty(backgroundImage)) {
       background = `url('${backgroundImage}') repeat`;
@@ -129,7 +129,7 @@ export const PokemonBackdropStyle = styled.div<IPokemonDialogBackdropProps>(
       transition: `0.3s cubic-bezier(0.7, 0.3, 0, 1)`,
       visibility: show ? `visible` : `hidden`,
       width: `100%`,
-      zIndex: 999
+      zIndex: zIndex || 999
     };
   }
 );
@@ -368,3 +368,58 @@ export const PokemonRegisterFAB = styled.button<{
     zIndex: 10000000
   };
 });
+
+export const MyPokemonTextfield = styled.input({
+  border: `1px solid #ddd`,
+  borderRadius: `5px`,
+  fontFamily: PRIMARY_FONT,
+  fontSize: FONT_SIZE.normal,
+  letterSpacing: 0.25,
+  padding: `10px`,
+  width: `calc(100% - 20px)`
+});
+
+export const MyPokemonButtonOk = styled.button(({ disabled }) => ({
+  '&::before': {
+    background: disabled
+      ? `rgba(255, 255, 255, 0.4)`
+      : `rgba(255, 255, 255, 0.05)`,
+    content: `''`,
+    height: `100%`,
+    left: 0,
+    position: `absolute`,
+    top: 0,
+    width: `100%`
+  },
+  background: COLOR.blue,
+  border: 0,
+  borderRadius: 50,
+  color: COLOR.white,
+  fontFamily: PRIMARY_FONT,
+  fontSize: FONT_SIZE.normal,
+  padding: `10px 20px`,
+  position: `relative`
+}));
+
+export const MyPokemonButtonCancel = styled.button(({ disabled }) => ({
+  '&::before': {
+    background: disabled
+      ? `rgba(255, 255, 255, 0.4)`
+      : `rgba(255, 255, 255, 0.05)`,
+    content: `''`,
+    height: `100%`,
+    left: 0,
+    position: `absolute`,
+    top: 0,
+    width: `100%`
+  },
+  background: COLOR.red,
+  border: 0,
+  borderRadius: 50,
+  color: COLOR.white,
+  fontFamily: PRIMARY_FONT,
+  fontSize: FONT_SIZE.normal,
+  marginLeft: 10,
+  padding: `10px 20px`,
+  position: `relative`
+}));

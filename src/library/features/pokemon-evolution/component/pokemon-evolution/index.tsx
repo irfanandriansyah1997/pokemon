@@ -89,7 +89,7 @@ const PokemonEvolution: FC<IPokemon> = ({
     <>
       <Heading>{`Evolution ${name}`}</Heading>
       {evolution.map(({ imageAfter, imageBefore, key, label }) => (
-        <Grid templates={[`130px`, `auto`, `130px`]} key={key}>
+        <Grid templates={[`115px`, `auto`, `115px`]} key={key}>
           <PokemonEvolutionInfo {...imageBefore} />
           <PokemonEvolutionLabel {...label} />
           <PokemonEvolutionInfo {...imageAfter} />

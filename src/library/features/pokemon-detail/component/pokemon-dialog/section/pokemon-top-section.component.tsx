@@ -40,7 +40,7 @@ const PokemonTopSection: FC<IPokemonTopSectionProps> = ({
         fontSize="normal"
         fontWeight={400}
       >
-        x
+        &times;
       </Text>
     </PokemonCloseDialog>
     <Text
