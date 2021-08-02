@@ -1,0 +1,95 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Testing Dialog Component Testing With Snapshot Testing With Dialog Hidden 1`] = `
+<Fragment>
+  <Styled(div)
+    color="rgba(0,0,0,0.25)"
+    onClick={[Function]}
+    show={false}
+    zIndex={99999999}
+  />
+  <Styled(div)
+    show={false}
+  >
+    <Styled(div)
+      show={false}
+    >
+      <Styled(div)>
+        <Styled(p)
+          color="primary"
+          fontSize="normal"
+          fontWeight={500}
+        >
+          Dialog Title
+        </Styled(p)>
+        <Styled(div)
+          onClick={[Function]}
+        >
+          <Styled(p)
+            fontSize="medium"
+          >
+            ×
+          </Styled(p)>
+        </Styled(div)>
+      </Styled(div)>
+      <Styled(div)>
+        Body Content
+      </Styled(div)>
+      <Styled(div)>
+        <button
+          type="button"
+        >
+          Sample Button
+        </button>
+      </Styled(div)>
+    </Styled(div)>
+  </Styled(div)>
+</Fragment>
+`;
+
+exports[`Testing Dialog Component Testing With Snapshot Testing With Dialog Shown 1`] = `
+<Fragment>
+  <Styled(div)
+    color="rgba(0,0,0,0.25)"
+    onClick={[Function]}
+    show={true}
+    zIndex={99999999}
+  />
+  <Styled(div)
+    show={true}
+  >
+    <Styled(div)
+      show={true}
+    >
+      <Styled(div)>
+        <Styled(p)
+          color="primary"
+          fontSize="normal"
+          fontWeight={500}
+        >
+          Dialog Title
+        </Styled(p)>
+        <Styled(div)
+          onClick={[Function]}
+        >
+          <Styled(p)
+            fontSize="medium"
+          >
+            ×
+          </Styled(p)>
+        </Styled(div)>
+      </Styled(div)>
+      <Styled(div)>
+        Body Content
+      </Styled(div)>
+      <Styled(div)>
+        <button
+          type="button"
+        >
+          Sample Button
+        </button>
+      </Styled(div)>
+    </Styled(div)>
+  </Styled(div)>
+</Fragment>
+`;

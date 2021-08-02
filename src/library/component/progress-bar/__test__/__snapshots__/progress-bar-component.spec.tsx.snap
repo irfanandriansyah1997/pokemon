@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Testing Progress Bar Testing Progress Bar Testing With Value Greater Than 75% 1`] = `"<div class=\\"css-qkdyee\\"><div value=\\"90\\" class=\\"css-m87n6w\\"></div></div>"`;
+
+exports[`Testing Progress Bar Testing Progress Bar Testing With Value Under 50% 1`] = `"<div class=\\"css-qkdyee\\"><div value=\\"45\\" class=\\"css-jza4d0\\"></div></div>"`;
+
+exports[`Testing Progress Bar Testing Progress Bar Testing With Value Under 75% 1`] = `"<div class=\\"css-qkdyee\\"><div value=\\"70\\" class=\\"css-1pxnehf\\"></div></div>"`;
+
+exports[`Testing Progress Bar Testing With Snapshot Testing With Value Greater Than 75% 1`] = `
+<Styled(div)>
+  <Styled(div)
+    maxValue={100}
+    value={90}
+  />
+</Styled(div)>
+`;
+
+exports[`Testing Progress Bar Testing With Snapshot Testing With Value Under 50% 1`] = `
+<Styled(div)>
+  <Styled(div)
+    maxValue={100}
+    value={45}
+  />
+</Styled(div)>
+`;
+
+exports[`Testing Progress Bar Testing With Snapshot Testing With Value Under 75% 1`] = `
+<Styled(div)>
+  <Styled(div)
+    maxValue={100}
+    value={70}
+  />
+</Styled(div)>
+`;

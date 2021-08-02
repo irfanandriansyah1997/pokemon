@@ -1,0 +1,48 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Testing Carousel Component Testing Snapshot Component 1`] = `
+<Styled(div)
+  showCarousel={true}
+>
+  <div
+    style={
+      Object {
+        "transform": "translateX(0%)",
+      }
+    }
+  >
+    <Styled(div)
+      key="image-1.jpg"
+    >
+      <img
+        alt="Pokemon"
+        loading="lazy"
+        src="image-1.jpg"
+      />
+    </Styled(div)>
+    <Styled(div)
+      key="image-2.jpg"
+    >
+      <img
+        alt="Pokemon"
+        loading="lazy"
+        src="image-2.jpg"
+      />
+    </Styled(div)>
+  </div>
+  <Styled(div)
+    onClick={[Function]}
+    show={false}
+  />
+  <Styled(div)
+    onClick={[Function]}
+    show={true}
+  />
+  <Styled(div)
+    indicator={0}
+  >
+    <div />
+    <div />
+  </Styled(div)>
+</Styled(div)>
+`;
