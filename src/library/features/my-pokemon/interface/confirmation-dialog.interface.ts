@@ -16,7 +16,6 @@ export type IConfirmationEvent = (
  * @since 2021.08.02
  */
 export interface IConfirmationDialog extends Pick<IDialogProps, 'show'> {
-  error?: string;
   name?: string;
   on: IConfirmationEvent;
 }

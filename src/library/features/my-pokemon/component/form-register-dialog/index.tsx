@@ -38,8 +38,19 @@ const FormRegistrationDialog: FC<IFormRegisterDialog> = ({
     setName(value);
   };
 
+  /**
+   * Simulate Cancel Register
+   * @returns {void}
+   */
+  const onCancelRegister = (): void => {
+    on({
+      event: `on-close`
+    });
+    setName(``);
+  };
+
   return (
-    <Dialog show={show} on={on} title="Catch Pokemon Succeess!">
+    <Dialog show={show} on={onCancelRegister} title="Catch Pokemon Succeess!">
       <Dialog.Body>
         <MyPokemonTextfield
           type="text"
@@ -63,15 +74,7 @@ const FormRegistrationDialog: FC<IFormRegisterDialog> = ({
         >
           Save
         </MyPokemonButtonOk>
-        <MyPokemonButtonCancel
-          type="button"
-          disabled={verifiedIsNotEmpty(error) || name.length === 0}
-          onClick={() =>
-            on({
-              event: `on-close`
-            })
-          }
-        >
+        <MyPokemonButtonCancel type="button" onClick={onCancelRegister}>
           Cancel
         </MyPokemonButtonCancel>
       </Dialog.Footer>

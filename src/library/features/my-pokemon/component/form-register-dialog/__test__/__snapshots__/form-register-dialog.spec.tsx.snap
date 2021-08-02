@@ -1,0 +1,73 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Testing Form Registration Dialog Testing Snapshot Component Testing Form Registration When Error Is Not Undefined 1`] = `
+<Dialog
+  on={[Function]}
+  show={true}
+  title="Catch Pokemon Succeess!"
+>
+  <Styled(div)>
+    <Styled(input)
+      onChange={[Function]}
+      placeholder="Give a pokemon name"
+      type="text"
+      value=""
+    />
+    <Styled(p)
+      color="red"
+    >
+      Error sample
+    </Styled(p)>
+  </Styled(div)>
+  <Styled(div)>
+    <Styled(button)
+      disabled={true}
+      onClick={[Function]}
+      type="button"
+    >
+      Save
+    </Styled(button)>
+    <Styled(button)
+      onClick={[Function]}
+      type="button"
+    >
+      Cancel
+    </Styled(button)>
+  </Styled(div)>
+</Dialog>
+`;
+
+exports[`Testing Form Registration Dialog Testing Snapshot Component Testing Initial Case 1`] = `
+<Dialog
+  on={[Function]}
+  show={true}
+  title="Catch Pokemon Succeess!"
+>
+  <Styled(div)>
+    <Styled(input)
+      onChange={[Function]}
+      placeholder="Give a pokemon name"
+      type="text"
+      value=""
+    />
+    <Styled(p)
+      color="red"
+    />
+  </Styled(div)>
+  <Styled(div)>
+    <Styled(button)
+      disabled={true}
+      onClick={[Function]}
+      type="button"
+    >
+      Save
+    </Styled(button)>
+    <Styled(button)
+      onClick={[Function]}
+      type="button"
+    >
+      Cancel
+    </Styled(button)>
+  </Styled(div)>
+</Dialog>
+`;
