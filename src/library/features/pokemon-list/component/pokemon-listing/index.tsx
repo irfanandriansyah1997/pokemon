@@ -1,10 +1,11 @@
 import { verifiedIsNotEmpty } from '@99/helper';
-import { FC, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import Loadable from 'react-loadable';
 
 import { IPokemonDialogEvent } from '@/library/features/pokemon-detail/interface';
 import PokemonCard from '@/library/features/pokemon-list/component/pokemon-card';
 import { usePokemonList } from '@/library/features/pokemon-list/hooks';
+import { useInfiniteScroll } from '@/library/hooks/infinite-scroll';
 import { NullAble } from '@/library/interface/general';
 import { IPokemon } from '@/library/interface/pokemon';
 import { Text } from '@/library/styles/general.styles';
@@ -25,6 +26,7 @@ const PokemonDialog = Loadable({
  * @since 2021.08.01
  */
 const PokemonList: FC = () => {
+  const [isFetching, setIsFetching] = useInfiniteScroll();
   const [selectedPokemon, registerPokemon] = useState<NullAble<IPokemon>>();
   const {
     action: { loadMore },
@@ -57,6 +59,13 @@ const PokemonList: FC = () => {
 
     if (selected) registerPokemon(selected);
   };
+
+  useEffect(() => {
+    if (isFetching) {
+      loadMore();
+      setIsFetching(false);
+    }
+  }, [isFetching, loadMore, setIsFetching]);
 
   return (
     <PokeListingSection>
