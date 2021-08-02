@@ -7,7 +7,11 @@ import { IPokemonDialogEvent } from '@/library/features/pokemon-detail/interface
 import PokemonCard from '@/library/features/pokemon-list/component/pokemon-card';
 import { NullAble } from '@/library/interface/general';
 import { IPokemon } from '@/library/interface/pokemon';
-import { PokeListingSection } from '@/library/styles/pokemon.styles';
+import { Text } from '@/library/styles/general.styles';
+import {
+  PokeListingNotFound,
+  PokeListingSection
+} from '@/library/styles/pokemon.styles';
 
 const PokemonDialog = Loadable({
   loader: () =>
@@ -68,6 +72,14 @@ const MyPokemonList: FC = () => {
         {pokemon.map(({ ...res }) => (
           <PokemonCard key={res.id} {...res} onClick={setSelectedPokemon} />
         ))}
+        {pokemon.length === 0 && (
+          <PokeListingNotFound>
+            <Text color="primary" fontSize="medium" fontWeight={500}>
+              Pokemon
+            </Text>
+            <Text fontSize="text">You don`t have any pokemon</Text>
+          </PokeListingNotFound>
+        )}
       </div>
       <PokemonDialog
         pokemon={selectedPokemon}

@@ -322,6 +322,22 @@ export const PokeListingSection = styled.div({
   justifyContent: `center`
 });
 
+export const PokeListingNotFound = styled.div({
+  alignItems: `center`,
+  background: `rgba(0, 0, 0, 0.025)`,
+  border: `1px dashed #ddd`,
+  borderRadius: 10,
+  display: `flex`,
+  flexDirection: `column`,
+  height: 100,
+  justifyContent: `center`,
+  margin: `20px`,
+  minWidth: `calc(100% - 40px)`,
+  overflow: `hidden`,
+  position: `relative`,
+  transition: `0.3s cubic-bezier(0.7, 0.3, 0, 1)`
+});
+
 export const PokeLoadMoreButton = styled.button<{ loading: boolean }>(
   ({ loading }) => ({
     background: `rgba(0, 0, 0, 0.4)`,

@@ -53,12 +53,13 @@ const FormRegistrationDialog: FC<IFormRegisterDialog> = ({
         <MyPokemonButtonOk
           type="button"
           disabled={verifiedIsNotEmpty(error) || name.length === 0}
-          onClick={() =>
+          onClick={() => {
             on({
               event: `on-submit`,
               payload: name
-            })
-          }
+            });
+            setName(``);
+          }}
         >
           Save
         </MyPokemonButtonOk>
