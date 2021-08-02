@@ -1,6 +1,6 @@
-# FE Boilerplate
+# Pokemon Dex
 
-create sample website using CRA
+create sample pokemon dex using CRA
 
 ## Installation
 
