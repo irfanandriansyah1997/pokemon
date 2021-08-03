@@ -11,8 +11,8 @@ const STORAGE_KEY = process.env.REACT_APP_STORAGE as string;
  * @author Irfan Andriansyah <irfan@99.co>
  * @since 2021.08.01
  */
-export const getPokemon = (): IPokemon[] => {
-  const temp = localStorage.getItem(STORAGE_KEY) || `[]`;
+export const getPokemon = (key = STORAGE_KEY): IPokemon[] => {
+  const temp = localStorage.getItem(key) || `[]`;
 
   return JSON.parse(temp) as IPokemon[];
 };
@@ -54,8 +54,8 @@ export const getCountPokemon = (name: string): number =>
  * @author Irfan Andriansyah <irfan@99.co>
  * @since 2021.08.01
  */
-export const pokemonIsNotExist = (name: string): boolean => {
-  const pokemonList = getPokemon();
+export const pokemonIsNotExist = (name: string, key = STORAGE_KEY): boolean => {
+  const pokemonList = getPokemon(key);
   if (pokemonList.length > 0) {
     return !verifiedIsNotEmpty(getPokemonByCustomName(name));
   }
@@ -70,10 +70,10 @@ export const pokemonIsNotExist = (name: string): boolean => {
  * @author Irfan Andriansyah <irfan@99.co>
  * @since 2021.08.01
  */
-const setPokemon = (param: IPokemon): IPokemon[] => {
+const setPokemon = (param: IPokemon, key = STORAGE_KEY): IPokemon[] => {
   const pokemonList = [...getPokemon(), param];
 
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(pokemonList));
+  localStorage.setItem(key, JSON.stringify(pokemonList));
 
   return pokemonList;
 };
@@ -97,7 +97,7 @@ export const savedMyPokemon = (
       return [setPokemon({ ...pokemon, customName }), true];
     }
 
-    return [getPokemon(), false];
+    throw new Error(`[Error] ${customName} pokemon is exists`);
   } catch {
     return [getPokemon(), false];
   }
@@ -124,7 +124,7 @@ export const deleteMyPokemon = (name: string): [IPokemon[], boolean] => {
       return [response, true];
     }
 
-    return [getPokemon(), false];
+    throw new Error(`[Error] ${name} pokemon is not exists`);
   } catch (e) {
     return [getPokemon(), false];
   }

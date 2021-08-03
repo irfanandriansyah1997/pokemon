@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Tab Action Testing Testing Snapshot 1`] = `
+<Styled(div)
+  count={2}
+>
+  <Styled(div)
+    active={true}
+    key="0"
+    onClick={[Function]}
+  >
+    <Styled(p)
+      color="red"
+      fontSize="normal"
+      fontWeight={500}
+    >
+      Tab List 1
+    </Styled(p)>
+  </Styled(div)>
+  <Styled(div)
+    active={false}
+    key="1"
+    onClick={[Function]}
+  >
+    <Styled(p)
+      color="secondary"
+      fontSize="normal"
+      fontWeight={500}
+    >
+      Tab List 2
+    </Styled(p)>
+  </Styled(div)>
+</Styled(div)>
+`;

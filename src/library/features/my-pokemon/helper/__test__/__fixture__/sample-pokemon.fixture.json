@@ -1,0 +1,14 @@
+[
+  {
+     "id":2,
+     "image":"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/2.png",
+     "name":"ivysaur",
+     "customName":"sample-testing"
+  },
+  {
+     "id":8,
+     "image":"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/8.png",
+     "name":"wartortle",
+     "customName":"my-turtle"
+  }
+]

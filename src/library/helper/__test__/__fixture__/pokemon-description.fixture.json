@@ -1,0 +1,35 @@
+[
+  {
+     "flavor_text":"It carries a seed\non its back right\nfrom birth. As it\fgrows older, the\nseed also grows\nlarger.",
+     "language":{
+        "name":"en",
+        "url":"https://pokeapi.co/api/v2/language/9/"
+     },
+     "version":{
+        "name":"silver",
+        "url":"https://pokeapi.co/api/v2/version/5/"
+     }
+  },
+  {
+     "flavor_text":"While it is young,\nit uses the\nnutrients that are\fstored in the\nseeds on its back\nin order to grow.",
+     "language":{
+        "name":"en",
+        "url":"https://pokeapi.co/api/v2/language/9/"
+     },
+     "version":{
+        "name":"crystal",
+        "url":"https://pokeapi.co/api/v2/version/6/"
+     }
+  },
+  {
+     "flavor_text":"BULBASAUR can be seen napping in\nbright sunlight.\nThere is a seed on its back.\fBy soaking up the sun’s rays, the seed\ngrows progressively larger.",
+     "language":{
+        "name":"en",
+        "url":"https://pokeapi.co/api/v2/language/9/"
+     },
+     "version":{
+        "name":"ruby",
+        "url":"https://pokeapi.co/api/v2/version/7/"
+     }
+  }
+]

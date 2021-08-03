@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Testing Error Dialog Component Testing Snapshot Component 1`] = `
+<Dialog
+  on={[MockFunction]}
+  show={true}
+  title="Failed"
+>
+  <Styled(div)>
+    <Styled(p)>
+      It ran away...
+    </Styled(p)>
+  </Styled(div)>
+</Dialog>
+`;
