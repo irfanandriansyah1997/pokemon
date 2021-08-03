@@ -1,21 +1,64 @@
-import { IConstruct, Routing } from '@/modules/routing';
+import { ApolloProvider } from '@apollo/client';
+import { FC, useState } from 'react';
+import Loadable from 'react-loadable';
 
-import MainRouting from './routing/main.routing';
+import TabAction from '@/library/component/tab-action';
+import MyPokemonProvider from '@/library/features/my-pokemon';
+import { Header } from '@/library/styles/general.styles';
+import { GraphqlConnection } from '@/modules/graphql/singleton';
+
+const MyPokemonList = Loadable({
+  loader: () =>
+    import(`@/library/features/my-pokemon/component/my-pokemon-list`),
+  loading: () => null
+});
+
+const PokemonList = Loadable({
+  loader: () =>
+    import(`@/library/features/pokemon-list/component/pokemon-listing`),
+  loading: () => null
+});
 
 /**
- * Apps
+ * Pokemon Apps
  * @author Irfan Andriansyah <irfan@99.co>
- * @description for register all routing on this apps
- * @since 2021.02.28
+ * @since 2021.05.03
  */
-class Apps extends Routing {
-  /**
-   * Modules
-   * @return {IConstruct[]}
-   */
-  get modules(): IConstruct[] {
-    return [MainRouting];
-  }
-}
+const App: FC = () => {
+  const [tabSelection, registerTabSelection] = useState<number>(0);
 
-export default Apps;
+  return (
+    <ApolloProvider client={GraphqlConnection.singleton()}>
+      <MyPokemonProvider>
+        <Header>
+          <img
+            loading="lazy"
+            src="https://i.ibb.co/bBTTVbp/logo.png"
+            alt="Pokedex Apps"
+          />
+          <TabAction
+            active={tabSelection}
+            list={[
+              {
+                id: 0,
+                text: `Pokedex List`
+              },
+              {
+                id: 1,
+                text: `My Pokemon`
+              }
+            ]}
+            on={({ event, payload }): void => {
+              if (event === `on-change-index`) {
+                registerTabSelection(payload);
+              }
+            }}
+          />
+        </Header>
+        {tabSelection === 0 ? <PokemonList /> : <MyPokemonList />}
+      </MyPokemonProvider>
+    </ApolloProvider>
+  );
+};
+
+export default App;

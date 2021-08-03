@@ -1,0 +1,35 @@
+[
+  {
+     "gender":null,
+     "held_item":{
+        "name":"held item sample"
+     },
+     "item":{
+        "name":"saphire item"
+     },
+     "known_move":{
+        "name":"move sample"
+     },
+     "known_move_type":{
+        "name":"move type sample"
+     },
+     "location":{
+        "name":"location sample"
+     },
+     "min_affection":76,
+     "min_beauty":10,
+     "min_happiness":100,
+     "min_level":16,
+     "needs_overworld_rain":false,
+     "party_species":null,
+     "party_type":null,
+     "relative_physical_stats":null,
+     "time_of_day":"100",
+     "trade_species":null,
+     "trigger":{
+        "name":"level-up",
+        "url":"https://pokeapi.co/api/v2/evolution-trigger/1/"
+     },
+     "turn_upside_down":false
+  }
+]

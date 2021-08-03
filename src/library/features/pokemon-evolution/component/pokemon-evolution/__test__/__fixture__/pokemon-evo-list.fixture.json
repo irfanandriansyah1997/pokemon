@@ -1,0 +1,32 @@
+[
+  {
+     "imageAfter":{
+        "images":"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/2.png",
+        "pokeName":"ivysaur"
+     },
+     "imageBefore":{
+        "images":"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png",
+        "pokeName":"bulbasaur"
+     },
+     "key":"level-0-0",
+     "label":{
+        "attributes":"Min Level 16",
+        "name":"level-up"
+     }
+  },
+  {
+     "imageAfter":{
+        "images":"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/3.png",
+        "pokeName":"venusaur"
+     },
+     "imageBefore":{
+        "images":"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/2.png",
+        "pokeName":"ivysaur"
+     },
+     "key":"level-1-0",
+     "label":{
+        "attributes":"Min Level 32",
+        "name":"level-up"
+     }
+  }
+]

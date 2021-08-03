@@ -10,7 +10,8 @@ import {
 import {
   IEvolutionItem,
   IEvolutionItemLabel,
-  IEvolutionItemPokemon
+  IEvolutionItemPokemon,
+  IEvolutionListPokemon
 } from '@/library/features/pokemon-evolution/interface';
 import { IPokemon, IPokemonEvoChain } from '@/library/interface/pokemon';
 import { POKEMON_EVOLUTION_QUERY } from '@/library/query';
@@ -55,6 +56,26 @@ const PokemonEvolutionInfo: FC<IEvolutionItemPokemon> = ({
 );
 
 /**
+ * Pokemon Evolution List
+ * @author Irfan Andriansyah <irfan@99.co>
+ * @description
+ * @since 2021.08.03
+ */
+export const PokemonEvolutionList: FC<IEvolutionListPokemon> = ({
+  evolution
+}) => (
+  <>
+    {evolution.map(({ imageAfter, imageBefore, key, label }) => (
+      <Grid templates={[`115px`, `auto`, `115px`]} key={key}>
+        <PokemonEvolutionInfo {...imageBefore} />
+        <PokemonEvolutionLabel {...label} />
+        <PokemonEvolutionInfo {...imageAfter} />
+      </Grid>
+    ))}
+  </>
+);
+
+/**
  * Pokemon Evolution
  * @author Irfan Andriansyah <irfan@99.co>
  * @since 2021.08.01
@@ -88,13 +109,7 @@ const PokemonEvolution: FC<IPokemon> = ({
   return (
     <>
       <Heading>{`Evolution ${name}`}</Heading>
-      {evolution.map(({ imageAfter, imageBefore, key, label }) => (
-        <Grid templates={[`115px`, `auto`, `115px`]} key={key}>
-          <PokemonEvolutionInfo {...imageBefore} />
-          <PokemonEvolutionLabel {...label} />
-          <PokemonEvolutionInfo {...imageAfter} />
-        </Grid>
-      ))}
+      <PokemonEvolutionList evolution={evolution} />
     </>
   );
 };
