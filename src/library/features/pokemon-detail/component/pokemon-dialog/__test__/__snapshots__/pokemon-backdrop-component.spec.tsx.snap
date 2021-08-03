@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Testing Pokemon Backdrop Component Testing Snapshot Test Testing With Set Background Image 1`] = `"<div class=\\"css-12v3m70\\"></div><div class=\\"css-12v3m70\\"></div>"`;
+
+exports[`Testing Pokemon Backdrop Component Testing Snapshot Test Testing With Set Color 1`] = `"<div color=\\"#ddd\\" class=\\"css-1jaz6a\\"></div><div class=\\"css-g8zdjg\\"></div>"`;
+
+exports[`Testing Pokemon Backdrop Component Testing Snapshot Test Testing With Unset Color 1`] = `"<div class=\\"css-g8zdjg\\"></div><div class=\\"css-g8zdjg\\"></div>"`;

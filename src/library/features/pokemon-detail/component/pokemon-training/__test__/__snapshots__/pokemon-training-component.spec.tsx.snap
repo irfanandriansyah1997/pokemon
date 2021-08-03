@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Testing Pokemon Training Card Component Testing Snapshot Test 1`] = `
+<Styled(div)>
+  <img
+    alt="Training"
+    loading="lazy"
+    src="pokemon.svg"
+  />
+  <Styled(p)
+    fontSize="normal"
+    fontWeight={400}
+  >
+    Sample Title
+  </Styled(p)>
+  <Styled(p)
+    color="primary"
+    fontSize="medium"
+    fontWeight={700}
+  >
+    50%
+  </Styled(p)>
+</Styled(div)>
+`;

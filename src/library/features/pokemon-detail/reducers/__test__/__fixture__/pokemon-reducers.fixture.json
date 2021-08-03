@@ -1,0 +1,9 @@
+{
+  "isLoadingRest": false,
+  "pokemon": {
+    "id": 1,
+    "image": "sample image",
+    "name": "Bulbasaur"
+  },
+  "selection": 0
+}

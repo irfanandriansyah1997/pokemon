@@ -1,0 +1,177 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Testing Pokemon About Component Testing Snapshot Test 1`] = `
+<Fragment>
+  <Styled(p)
+    style={
+      Object {
+        "marginTop": 24,
+      }
+    }
+    textAlign="justify"
+  >
+    BULBASAUR can be seen napping in
+bright sunlight.
+There is a seed on its back.By soaking up the sun’s rays, the seed
+grows progressively larger.
+  </Styled(p)>
+  <Styled(div)>
+    <Styled(div)
+      key="grass"
+    >
+      grass
+    </Styled(div)>
+    <Styled(div)
+      key="poison"
+    >
+      poison
+    </Styled(div)>
+  </Styled(div)>
+  <Styled(p)>
+    Pokedex Data
+  </Styled(p)>
+  <Styled(div)
+    rowGap={16}
+    templates={
+      Array [
+        "90px",
+        "5px",
+        "auto",
+      ]
+    }
+  >
+    <Styled(p)
+      fontSize="text"
+      fontWeight={500}
+    >
+      Height
+    </Styled(p)>
+    <Styled(p)
+      fontSize="text"
+    >
+      :
+    </Styled(p)>
+    <Styled(p)
+      fontSize="text"
+    >
+      0.7 m
+    </Styled(p)>
+    <Styled(p)
+      fontSize="text"
+      fontWeight={500}
+    >
+      Weight
+    </Styled(p)>
+    <Styled(p)
+      fontSize="text"
+    >
+      :
+    </Styled(p)>
+    <Styled(p)
+      fontSize="text"
+    >
+      6.9 kg
+    </Styled(p)>
+    <Styled(p)
+      fontSize="text"
+      fontWeight={500}
+    >
+      Egg Cycle
+    </Styled(p)>
+    <Styled(p)
+      fontSize="text"
+    >
+      :
+    </Styled(p)>
+    <Styled(p)
+      fontSize="text"
+    >
+      20 Days
+    </Styled(p)>
+    <Styled(p)
+      fontSize="text"
+      fontWeight={500}
+    >
+      Egg Groups
+    </Styled(p)>
+    <Styled(p)
+      fontSize="text"
+    >
+      :
+    </Styled(p)>
+    <Styled(div)>
+      <Styled(p)
+        fontSize="text"
+        key="monster"
+      >
+        <img
+          alt="monster"
+          loading="lazy"
+          src="eggs.svg"
+        />
+        monster
+      </Styled(p)>
+      <Styled(p)
+        fontSize="text"
+        key="plant"
+      >
+        <img
+          alt="plant"
+          loading="lazy"
+          src="eggs.svg"
+        />
+        plant
+      </Styled(p)>
+    </Styled(div)>
+  </Styled(div)>
+  <Styled(p)>
+    Ability
+  </Styled(p)>
+  <Styled(ul)>
+    <li
+      key="overgrow"
+    >
+      <Styled(p)
+        fontSize="normal"
+        fontWeight={500}
+      >
+        overgrow
+         
+      </Styled(p)>
+    </li>
+    <li
+      key="chlorophyll"
+    >
+      <Styled(p)
+        fontSize="normal"
+        fontWeight={500}
+      >
+        chlorophyll
+         
+        (Hidden Ability)
+      </Styled(p)>
+    </li>
+  </Styled(ul)>
+  <Styled(p)>
+    Training
+  </Styled(p)>
+  <Styled(div)>
+    <PokemonTraining
+      title="Base Experience"
+      value="64"
+    />
+    <PokemonTraining
+      title="Base Happiness"
+      value="70"
+    />
+    <PokemonTraining
+      title="Catch Rate"
+      value="45%"
+    />
+    <PokemonTraining
+      title="Growth Rate"
+      value="medium-slow"
+    />
+  </Styled(div)>
+</Fragment>
+`;
