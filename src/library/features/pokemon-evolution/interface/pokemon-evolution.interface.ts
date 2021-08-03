@@ -29,3 +29,12 @@ export interface IEvolutionItemPokemon {
   images: string;
   pokeName: string;
 }
+
+/**
+ * Evolution List Pokemon Interface
+ * @author Irfan Andriansyah <irfan@99.co>
+ * @since 2021.08.01
+ */
+export interface IEvolutionListPokemon {
+  evolution: IEvolutionItem[];
+}

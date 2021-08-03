@@ -38,7 +38,6 @@ const PokemonCard: FC<IPokemonCardProps> = ({
       color={data.vibrant || `#ddd`}
       role="button"
       onClick={onClickCard}
-      onKeyPress={(): void => undefined}
     >
       <div>
         <img loading="lazy" alt={`Pokemon ${name}`} src={`${image}`} />

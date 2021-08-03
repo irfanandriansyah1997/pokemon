@@ -17,7 +17,11 @@ import {
  */
 export const getIDFromEvolution = (url: string): string => {
   const splitUrl = url.split(`/`);
-  return splitUrl ? splitUrl[splitUrl.length - 2] : ``;
+  if (splitUrl && splitUrl.length > 2) {
+    return splitUrl[splitUrl.length - 2];
+  }
+
+  return ``;
 };
 
 /**
@@ -27,7 +31,7 @@ export const getIDFromEvolution = (url: string): string => {
  * @returns {IEvolutionItemPokemon}
  * @since 2021.08.01
  */
-const generatePokemon = ({
+export const generatePokemon = ({
   species: { name, url }
 }: IPokemonEvo): IEvolutionItemPokemon => {
   const id = getIDFromEvolution(`${url}`);
@@ -46,7 +50,7 @@ const generatePokemon = ({
  * @author Irfan Andriansyah <irfan@99.co>
  * @since 2021.08.01
  */
-const generateEvolutionLabel = (
+export const generateEvolutionLabel = (
   evolutionDetails: IPokemonEvoDetail[]
 ): IEvolutionItemLabel => {
   const response: IEvolutionItemLabel = {
@@ -116,11 +120,11 @@ const generateEvolutionLabel = (
  * @param {IPokemonEvo} chain - chain pokemon evolution
  * @returns {IEvolutionItem[]}
  */
-const generateEvolutionItem = (
+export const generateEvolutionItem = (
   chain: IPokemonEvo,
   level = 0
 ): IEvolutionItem[] => {
-  const response: any[] = [];
+  const response: IEvolutionItem[] = [];
   const { evolves_to } = chain;
 
   if (evolves_to.length > 0) {
@@ -158,4 +162,4 @@ export const generateEvolution = (
     }
   }: IPokemonEvoChain,
   index = 0
-): any[] => generateEvolutionItem(chain, index);
+): IEvolutionItem[] => generateEvolutionItem(chain, index);

@@ -1,0 +1,73 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Testing Pokemon Card Testing Snapshot Component Testing Card From My Pokemon List 1`] = `
+<Styled(div)
+  color="#ddd"
+  onClick={[Function]}
+  role="button"
+  tabIndex={0}
+>
+  <div>
+    <img
+      alt="Pokemon Bulbasaur"
+      loading="lazy"
+      src="image"
+    />
+    <div
+      className="pokemon-text"
+    >
+      <Styled(p)
+        color="white"
+        fontSize="large"
+        fontWeight={700}
+      >
+        #001
+      </Styled(p)>
+      <Styled(p)
+        color="white"
+        fontSize="normal"
+        fontWeight={400}
+      >
+        My Bulbasaur
+      </Styled(p)>
+    </div>
+    <PokeBall />
+  </div>
+</Styled(div)>
+`;
+
+exports[`Testing Pokemon Card Testing Snapshot Component Testing Card From Pokemon List 1`] = `
+<Styled(div)
+  color="#ddd"
+  onClick={[Function]}
+  role="button"
+  tabIndex={0}
+>
+  <div>
+    <img
+      alt="Pokemon Bulbasaur"
+      loading="lazy"
+      src="image"
+    />
+    <div
+      className="pokemon-text"
+    >
+      <Styled(p)
+        color="white"
+        fontSize="large"
+        fontWeight={700}
+      >
+        #001
+      </Styled(p)>
+      <Styled(p)
+        color="white"
+        fontSize="normal"
+        fontWeight={400}
+      >
+        Bulbasaur
+      </Styled(p)>
+    </div>
+    <PokeBall />
+  </div>
+</Styled(div)>
+`;

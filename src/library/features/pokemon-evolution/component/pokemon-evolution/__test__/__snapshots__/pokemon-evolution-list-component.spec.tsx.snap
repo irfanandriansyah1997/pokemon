@@ -1,0 +1,54 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Testing Pokemon Evolution List Testing With Snapshot Testing Mounted 1`] = `"<div class=\\"css-2gx4tk\\"><div class=\\"css-177dxd8\\"><img loading=\\"lazy\\" src=\\"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png\\" alt=\\"bulbasaur\\"><p font-weight=\\"500\\" font-size=\\"text\\" class=\\"css-17tivp9\\">bulbasaur</p></div><div class=\\"css-xr71pc\\"><img loading=\\"lazy\\" src=\\"next-arrow.svg\\" alt=\\"evolution arrow\\"><p font-weight=\\"500\\" font-size=\\"normal\\" color=\\"primary\\" class=\\"css-nftjgg\\">level-up</p><p font-weight=\\"400\\" font-size=\\"text\\" color=\\"secondary\\" class=\\"css-1brd6hq\\">Min Level 16</p></div><div class=\\"css-177dxd8\\"><img loading=\\"lazy\\" src=\\"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/2.png\\" alt=\\"ivysaur\\"><p font-weight=\\"500\\" font-size=\\"text\\" class=\\"css-17tivp9\\">ivysaur</p></div></div><div class=\\"css-2gx4tk\\"><div class=\\"css-177dxd8\\"><img loading=\\"lazy\\" src=\\"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/2.png\\" alt=\\"ivysaur\\"><p font-weight=\\"500\\" font-size=\\"text\\" class=\\"css-17tivp9\\">ivysaur</p></div><div class=\\"css-xr71pc\\"><img loading=\\"lazy\\" src=\\"next-arrow.svg\\" alt=\\"evolution arrow\\"><p font-weight=\\"500\\" font-size=\\"normal\\" color=\\"primary\\" class=\\"css-nftjgg\\">level-up</p><p font-weight=\\"400\\" font-size=\\"text\\" color=\\"secondary\\" class=\\"css-1brd6hq\\">Min Level 32</p></div><div class=\\"css-177dxd8\\"><img loading=\\"lazy\\" src=\\"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/3.png\\" alt=\\"venusaur\\"><p font-weight=\\"500\\" font-size=\\"text\\" class=\\"css-17tivp9\\">venusaur</p></div></div>"`;
+
+exports[`Testing Pokemon Evolution List Testing With Snapshot Testing Shallow 1`] = `
+<Fragment>
+  <Styled(div)
+    key="level-0-0"
+    templates={
+      Array [
+        "115px",
+        "auto",
+        "115px",
+      ]
+    }
+  >
+    <PokemonEvolutionInfo
+      images="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png"
+      pokeName="bulbasaur"
+    />
+    <PokemonEvolutionLabel
+      attributes="Min Level 16"
+      name="level-up"
+    />
+    <PokemonEvolutionInfo
+      images="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/2.png"
+      pokeName="ivysaur"
+    />
+  </Styled(div)>
+  <Styled(div)
+    key="level-1-0"
+    templates={
+      Array [
+        "115px",
+        "auto",
+        "115px",
+      ]
+    }
+  >
+    <PokemonEvolutionInfo
+      images="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/2.png"
+      pokeName="ivysaur"
+    />
+    <PokemonEvolutionLabel
+      attributes="Min Level 32"
+      name="level-up"
+    />
+    <PokemonEvolutionInfo
+      images="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/3.png"
+      pokeName="venusaur"
+    />
+  </Styled(div)>
+</Fragment>
+`;
